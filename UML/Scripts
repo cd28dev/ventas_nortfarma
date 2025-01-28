@@ -1,0 +1,299 @@
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS `Persona`;
+DROP TABLE IF EXISTS `TipoDocumento`;
+DROP TABLE IF EXISTS `Empleado`;
+DROP TABLE IF EXISTS `TipoComprobante`;
+DROP TABLE IF EXISTS `Comprobante`;
+DROP TABLE IF EXISTS `Cajero`;
+DROP TABLE IF EXISTS `Pago`;
+DROP TABLE IF EXISTS `Ciudad`;
+DROP TABLE IF EXISTS `Farmacia`;
+DROP TABLE IF EXISTS `Venta`;
+DROP TABLE IF EXISTS `Vendedor`;
+DROP TABLE IF EXISTS `sadas`;
+DROP TABLE IF EXISTS `Administrador`;
+DROP TABLE IF EXISTS `Anulacion`;
+DROP TABLE IF EXISTS `DetalleDeVenta`;
+DROP TABLE IF EXISTS `Pedido`;
+DROP TABLE IF EXISTS `CarritoCompra`;
+DROP TABLE IF EXISTS `Item`;
+DROP TABLE IF EXISTS `Producto`;
+DROP TABLE IF EXISTS `CategoriaProducto`;
+DROP TABLE IF EXISTS `TipoCliente`;
+DROP TABLE IF EXISTS `Cliente`;
+DROP TABLE IF EXISTS `Tarjeta`;
+DROP TABLE IF EXISTS `Entity1`;
+DROP TABLE IF EXISTS `TipoTarjeta`;
+DROP TABLE IF EXISTS `EntidadFinanciera`;
+DROP TABLE IF EXISTS `DetalleDePago`;
+DROP TABLE IF EXISTS `MedioPago`;
+DROP TABLE IF EXISTS `Usuario`;
+DROP TABLE IF EXISTS `Roles`;
+DROP TABLE IF EXISTS `Usuario_Rol`;
+DROP TABLE IF EXISTS `TipoEmpleado`;
+SET FOREIGN_KEY_CHECKS = 1;
+
+CREATE TABLE `Persona` (
+    `idPersona` INTEGER NOT NULL,
+    `nombres` VARCHAR(50) NOT NULL,
+    `apellidos` VARCHAR(50) NOT NULL,
+    `nroDocumento` VARCHAR(11) NOT NULL,
+    `email` VARCHAR(50) NOT NULL,
+    `telefono` VARCHAR(9) NOT NULL,
+    `fechaNacimiento` DATE NOT NULL,
+    `lugarNacimiento` VARCHAR(50) NOT NULL,
+    `direccion` VARCHAR(50) NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    `idTipoDoc` INTEGER NOT NULL,
+    `idEmpleado` INTEGER NOT NULL,
+    PRIMARY KEY (`idPersona`),
+    UNIQUE (`nroDocumento`, `email`, `telefono`)
+);
+
+CREATE TABLE `TipoDocumento` (
+    `idTipoDoc` INTEGER NOT NULL,
+    `nombre` VARCHAR(50) NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`idTipoDoc`),
+    UNIQUE (`nombre`)
+);
+
+CREATE TABLE `Empleado` (
+    `idEmpleado` INTEGER NOT NULL,
+    `fechaIngreso` DATE NOT NULL,
+    `salario` NUMERIC NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    `idCajero` INTEGER NOT NULL,
+    `idPersona` INTEGER NOT NULL,
+    `puesto` VARCHAR(50) NOT NULL,
+    `idTipoEmpleado` INTEGER NOT NULL,
+    PRIMARY KEY (`idEmpleado`)
+);
+
+CREATE TABLE `TipoComprobante` (
+    `idTipoComprobante` INTEGER NOT NULL,
+    `nombreTipo` VARCHAR NOT NULL,
+    PRIMARY KEY (`idTipoComprobante`),
+    UNIQUE (`nombreTipo`)
+);
+
+CREATE TABLE `Comprobante` (
+    `idComprobante` INTEGER NOT NULL,
+    `nroComporbante` VARCHAR(50) NOT NULL,
+    `fechaEmision` DATE NOT NULL,
+    `idTipoComprobante` INTEGER NOT NULL,
+    `idPago` INTEGER NOT NULL,
+    PRIMARY KEY (`idComprobante`),
+    UNIQUE (`nroComporbante`)
+);
+
+CREATE TABLE `Cajero` (
+    `idCajero` INTEGER NOT NULL,
+    `idEmpleado` INTEGER NOT NULL,
+    PRIMARY KEY (`idCajero`)
+);
+
+CREATE TABLE `Pago` (
+    `idPago` INTEGER NOT NULL,
+    `fecha` DATE NOT NULL,
+    `total` DOUBLE NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    `idEmpleado` INTEGER NOT NULL,
+    `idVenta` INTEGER NOT NULL,
+    PRIMARY KEY (`idPago`)
+);
+
+CREATE TABLE `Ciudad` (
+    `idCiudad` INTEGER NOT NULL,
+    `nombreCiudad` VARCHAR NOT NULL,
+    `estado` VARCHAR NOT NULL,
+    PRIMARY KEY (`idCiudad`)
+);
+
+CREATE TABLE `Farmacia` (
+    `idFarmacia` INTEGER NOT NULL,
+    `nombre` VARCHAR(50) NOT NULL,
+    `direccion` VARCHAR(50) NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    `idCiudad` INTEGER NOT NULL,
+    PRIMARY KEY (`idFarmacia`)
+);
+
+CREATE TABLE `Venta` (
+    `idVenta` INTEGER NOT NULL,
+    `fecha` DATE NOT NULL,
+    `total` DOUBLE NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    `idPedido` INTEGER NOT NULL,
+    `idFarmacia` INTEGER NOT NULL,
+    `idEmpleado` INTEGER NOT NULL,
+    `idPedido` INTEGER NOT NULL,
+    PRIMARY KEY (`idVenta`)
+);
+
+CREATE TABLE `Vendedor` (
+    `idVendedor` INTEGER NOT NULL,
+    `idEmpleado` INTEGER NOT NULL,
+    PRIMARY KEY (`idVendedor`)
+);
+
+CREATE TABLE `sadas` (
+);
+
+CREATE TABLE `Administrador` (
+    `idAdministrador` INTEGER NOT NULL,
+    `idEmpleado` INTEGER NOT NULL,
+    PRIMARY KEY (`idAdministrador`)
+);
+
+CREATE TABLE `Anulacion` (
+    `idAnulacion` INTEGER NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    `idVenta` INTEGER NOT NULL,
+    `idEmpleado` INTEGER NOT NULL,
+    `idDetalleDeVenta` INTEGER NOT NULL,
+    PRIMARY KEY (`idAnulacion`)
+);
+
+CREATE TABLE `DetalleDeVenta` (
+    `idDetalleDeVenta` INTEGER NOT NULL,
+    `cantidad` INTEGER NOT NULL,
+    `dscto` FLOAT NOT NULL,
+    `subTotal` FLOAT NOT NULL,
+    `idVenta` INTEGER NOT NULL,
+    PRIMARY KEY (`idDetalleDeVenta`)
+);
+
+CREATE TABLE `Pedido` (
+    `idPedido` INTEGER NOT NULL,
+    `fechaRecojo` DATE NOT NULL,
+    `direccionEntrega` VARCHAR(50) NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    `idCarritoCompra` INTEGER NOT NULL,
+    PRIMARY KEY (`idPedido`)
+);
+
+CREATE TABLE `CarritoCompra` (
+    `idCarrito` INTEGER NOT NULL,
+    `items` VARCHAR(50) NOT NULL,
+    `total_pagar` NUMERIC NOT NULL,
+    PRIMARY KEY (`idCarrito`)
+);
+
+CREATE TABLE `Item` (
+    `idItem` INTEGER NOT NULL,
+    `nombreProducto` VARCHAR(50) NOT NULL,
+    `cantidad` INTEGER NOT NULL,
+    `sub_total` NUMERIC NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    `idCarrito` INTEGER NOT NULL,
+    `idProducto` INTEGER NOT NULL,
+    PRIMARY KEY (`idItem`)
+);
+
+CREATE TABLE `Producto` (
+    `idProducto` INTEGER NOT NULL,
+    `nombreProducto` VARCHAR(50) NOT NULL,
+    `precioLista` NUMERIC NOT NULL,
+    `descripcion` VARCHAR(50) NOT NULL,
+    `idCategoria` INTEGER NOT NULL,
+    PRIMARY KEY (`idProducto`)
+);
+
+CREATE TABLE `CategoriaProducto` (
+    `idCategoria` INTEGER NOT NULL,
+    `descripcion` VARCHAR(50) NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`idCategoria`)
+);
+
+CREATE TABLE `TipoCliente` (
+    `idTipo` INTEGER NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    `idPersona` INTEGER NOT NULL,
+    `nombreTipo` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`idTipo`)
+);
+
+CREATE TABLE `Cliente` (
+    `idCliente` INTEGER NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    `idPersona` INTEGER NOT NULL,
+    `idTipo` INTEGER NOT NULL,
+    PRIMARY KEY (`idCliente`)
+);
+
+CREATE TABLE `Tarjeta` (
+    `idTarjeta` INTEGER NOT NULL,
+    `nroCuenta` VARCHAR(50) NOT NULL,
+    `nroTarjeta` VARCHAR(50) NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    `idCliente` INTEGER NOT NULL,
+    `idTipoTarjeta` INTEGER NOT NULL,
+    PRIMARY KEY (`idTarjeta`),
+    UNIQUE (`nroCuenta`, `nroTarjeta`)
+);
+
+CREATE TABLE `Entity1` (
+);
+
+CREATE TABLE `TipoTarjeta` (
+    `idTipoCliente` INTEGER NOT NULL,
+    `nombreTipo` VARCHAR(50) NOT NULL,
+    `idEntidad` INTEGER NOT NULL,
+    PRIMARY KEY (`idTipoCliente`)
+);
+
+CREATE TABLE `EntidadFinanciera` (
+    `idEntidad` INTEGER NOT NULL,
+    `razonSocial` VARCHAR(50) NOT NULL,
+    `nroRuc` VARCHAR(11) NOT NULL,
+    `ubicacion` VARCHAR(11) NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`idEntidad`),
+    UNIQUE (`razonSocial`)
+);
+
+CREATE TABLE `DetalleDePago` (
+    `idDetalleDePago` INTEGER NOT NULL,
+    `monto` NUMERIC NOT NULL,
+    `idTarjeta` INTEGER NOT NULL,
+    `idMedio` INTEGER NOT NULL,
+    `idPago` INTEGER NOT NULL,
+    PRIMARY KEY (`idDetalleDePago`)
+);
+
+CREATE TABLE `MedioPago` (
+    `idMedio` INTEGER NOT NULL,
+    `nombre` VARCHAR NOT NULL,
+    `estado` VARCHAR NOT NULL,
+    PRIMARY KEY (`idMedio`)
+);
+
+CREATE TABLE `Usuario` (
+    `idUsuario` INTEGER NOT NULL,
+    `idPersona` INTEGER NOT NULL,
+    `nombreUsuario` VARCHAR(50) NOT NULL,
+    `contraseña` VARCHAR(8) NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`idUsuario`),
+    UNIQUE (`nombreUsuario`)
+);
+
+CREATE TABLE `Roles` (
+    `idRol` INTEGER NOT NULL,
+    `nombreRol` VARCHAR NOT NULL,
+    PRIMARY KEY (`idRol`)
+);
+
+CREATE TABLE `Usuario_Rol` (
+    `idUsuario` INTEGER NOT NULL,
+    `idRol` INTEGER NOT NULL
+);
+
+CREATE TABLE `TipoEmpleado` (
+    `idTipoEmpleado` INTEGER NOT NULL,
+    `nombreTipo` VARCHAR(50) NOT NULL,
+    `estado` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`idTipoEmpleado`)
+);

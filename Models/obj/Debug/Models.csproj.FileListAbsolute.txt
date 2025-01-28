@@ -1,0 +1,6 @@
+D:\UNP - [Ing. Informática]\2024-II\NortFarma\Models\bin\Debug\Models.dll
+D:\UNP - [Ing. Informática]\2024-II\NortFarma\Models\bin\Debug\Models.pdb
+D:\UNP - [Ing. Informática]\2024-II\NortFarma\Models\obj\Debug\Models.csproj.AssemblyReference.cache
+D:\UNP - [Ing. Informática]\2024-II\NortFarma\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
+D:\UNP - [Ing. Informática]\2024-II\NortFarma\Models\obj\Debug\Models.dll
+D:\UNP - [Ing. Informática]\2024-II\NortFarma\Models\obj\Debug\Models.pdb
