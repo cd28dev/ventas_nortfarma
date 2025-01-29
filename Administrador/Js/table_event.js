@@ -104,6 +104,7 @@ function showModal(data) {
 
     let fecha = new Date(parseInt(data.FechaNacimiento.replace(/\/Date\((.*?)\)\//, "$1")));
     let fechaFormateada = fecha.toISOString().split('T')[0];
+    
     document.getElementById('tipoDocumento').value = data.TipoDoc.Nombre;
     document.getElementById('nmroDocumento').value = data.NroDocumento;
     document.getElementById('nombreUsuario').value = data.Nombres;
@@ -116,6 +117,7 @@ function showModal(data) {
     document.getElementById('username').value = data.Username;
     document.getElementById('password').value = data.Password;
     document.getElementById('activo').value = data.Estado;
+
     modal.show();
 }
 
