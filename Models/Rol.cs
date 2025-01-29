@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Models
 {
@@ -6,6 +7,8 @@ namespace Models
     {
         public string IdRol { get; set; }
         public string NameRol { get; set; }
+
+        public List<Usuario> Usuarios { get; set; }
 
         // Constructor con validación
         public Rol(string idRol, string nameRol)
@@ -17,6 +20,8 @@ namespace Models
             NameRol = nameRol;
         }
 
-        public Rol() { }
+        public Rol() { 
+            Usuarios = new List<Usuario>();
+        }
     }
 }

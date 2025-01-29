@@ -1,4 +1,6 @@
-﻿namespace Models
+﻿using System.Collections.Generic;
+
+namespace Models
 {
     public class Ciudad
     {
@@ -7,8 +9,12 @@
         public string NombreCiudad { get; set; }
         public string Estado { get; set; }
 
+        public List<Farmacia> farmacias { get; set; }
+
         // Constructor vacío
-        public Ciudad() { }
+        public Ciudad() { 
+            farmacias = new List<Farmacia>();
+        }
 
         // Constructor lleno
         public Ciudad(string idCiudad, string nombreCiudad, string estado)

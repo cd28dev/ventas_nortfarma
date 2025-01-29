@@ -9,3 +9,14 @@ D:\UNP - [Ing. Informática]\2024-II\NortFarma\Services\bin\Debug\Models.pdb
 D:\UNP - [Ing. Informática]\2024-II\NortFarma\Services\obj\Debug\Services.csproj.Up2Date
 D:\UNP - [Ing. Informática]\2024-II\NortFarma\Services\obj\Debug\Services.dll
 D:\UNP - [Ing. Informática]\2024-II\NortFarma\Services\obj\Debug\Services.pdb
+D:\Autodidacta - [Ing. Informática]\Proyectos git\Proyecto Ing. Software - C#\Services\bin\Debug\Services.dll
+D:\Autodidacta - [Ing. Informática]\Proyectos git\Proyecto Ing. Software - C#\Services\bin\Debug\Services.pdb
+D:\Autodidacta - [Ing. Informática]\Proyectos git\Proyecto Ing. Software - C#\Services\bin\Debug\Data.dll
+D:\Autodidacta - [Ing. Informática]\Proyectos git\Proyecto Ing. Software - C#\Services\bin\Debug\Models.dll
+D:\Autodidacta - [Ing. Informática]\Proyectos git\Proyecto Ing. Software - C#\Services\bin\Debug\Data.pdb
+D:\Autodidacta - [Ing. Informática]\Proyectos git\Proyecto Ing. Software - C#\Services\bin\Debug\Models.pdb
+D:\Autodidacta - [Ing. Informática]\Proyectos git\Proyecto Ing. Software - C#\Services\obj\Debug\Services.csproj.AssemblyReference.cache
+D:\Autodidacta - [Ing. Informática]\Proyectos git\Proyecto Ing. Software - C#\Services\obj\Debug\Services.csproj.CoreCompileInputs.cache
+D:\Autodidacta - [Ing. Informática]\Proyectos git\Proyecto Ing. Software - C#\Services\obj\Debug\Services.csproj.Up2Date
+D:\Autodidacta - [Ing. Informática]\Proyectos git\Proyecto Ing. Software - C#\Services\obj\Debug\Services.dll
+D:\Autodidacta - [Ing. Informática]\Proyectos git\Proyecto Ing. Software - C#\Services\obj\Debug\Services.pdb

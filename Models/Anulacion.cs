@@ -7,19 +7,20 @@ namespace Models
         // Propiedades automáticas con validación en el set
         public string IdAnulacion { get; set; }
         public string Estado { get; set; }
-        public string IdVenta { get; set; }
-        public string IdEmpleado { get; set; }
-        public string IdDetalleVenta { get; set; }
+        public Venta venta { get; set; }
+        public Empleado empleado { get; set; }
+        public DetalleDeVenta detVenta { get; set; }
 
-        public Anulacion(string idAnulacion, string estado, string idVenta, string idEmpleado, string idDetalleVenta)
+        public Anulacion(string idAnulacion, string estado, Venta v, Empleado e, DetalleDeVenta dv)
         {
             this.IdAnulacion = idAnulacion;
             this.Estado = estado;
-            this.IdVenta = idVenta;
-            this.IdEmpleado = idEmpleado;
-            this.IdDetalleVenta = idDetalleVenta;
+            this.venta = v;
+            this.empleado = e;
+            this.detVenta = dv;
         }
 
+        public Anulacion() { }
         
     }
 }

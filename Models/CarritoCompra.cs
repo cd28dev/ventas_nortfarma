@@ -7,6 +7,8 @@ namespace Models
         // Propiedades automáticas
         public string IdCarrito { get; set; }
         public List<Item> Items { get; set; }
+
+        public List<Pedido> Pedidos { get; set; }
         public double TotalPagar { get; set; }
 
         public CarritoCompra(string idCarrito, List<Item> items, double totalPagar)
@@ -15,6 +17,13 @@ namespace Models
             Items = items;
             TotalPagar = totalPagar;
         }
+
+
+        public CarritoCompra() { 
+            Items = new List<Item>();
+            Pedidos = new List<Pedido>();
+        }
+
 
         // Método adicional para agregar un ítem al carrito
         public void AgregarItem(Item item)

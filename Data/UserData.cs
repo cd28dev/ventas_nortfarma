@@ -33,7 +33,6 @@ namespace Data
                 {
                     Rol rol = new Rol();
                     TipoDocumento td = new TipoDocumento();
-                    List<Rol> roles = new List<Rol>();
                     user.NroDocumento = dr["nroDocumento"].ToString();
                     user.Username = dr["nombreUsuario"].ToString();
                     user.Estado = dr["estado"].ToString();
@@ -46,11 +45,10 @@ namespace Data
                     user.LugarNacimiento = dr["lugarNacimiento"].ToString();
                     rol.IdRol = dr["idRol"].ToString();
                     rol.NameRol = dr["nombreRol"].ToString();
-                    roles.Add(rol);
-                    user.Roles = roles;
+                    user.Roles.Add(rol);
                     td.IdTipoDoc = dr["idTipoDoc"].ToString();
                     td.Nombre = dr["nombre"].ToString();
-                    td.users.Add(user);
+                    user.TipoDoc = td;
                 }
             }
             catch (SqlException ex)

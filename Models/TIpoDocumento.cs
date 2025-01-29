@@ -9,7 +9,7 @@ namespace Models
         public string Nombre { get; set; }
         public string Estado { get; set; }
 
-        public List<Usuario> users { get; set; }  
+        public List<Persona> personas { get; set; }  
 
         // Constructor con validación
         public TipoDocumento(string idTipoDoc, string nombre, string estado)
@@ -24,11 +24,13 @@ namespace Models
         }
 
         // Constructor vacío (opcional)
-        public TipoDocumento() { }
+        public TipoDocumento() {
+            personas = new List<Persona>();
+        }
 
-        private void add(Usuario user)
+        private void add(Persona persona)
         {
-            users.Add(user);
+            personas.Add(persona);
         }
     }
 }

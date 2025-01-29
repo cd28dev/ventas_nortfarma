@@ -1,2 +1,72 @@
-# Ignorar archivos y carpetas generados por Visual Studio
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Dd]istro/
+[Dd]ist/
+[Dd]ebugFinal/
+
+# User-specific files
 .vs/
+.vscode/
+.idea/
+
+# User-specific files (Windows)
+*.user
+*.suo
+*.userosscache
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Test Results
+TestResults/
+
+# Logs
+*.log
+
+# Visual Studio for Mac
+.vscode/
+
+# .NET Core files
+project.lock.json
+project.fragment.lock.json
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# IIS Express config
+iisexpress/
+
+# LocalDB files
+*.mdf
+*.ldf
+
+# Windows Installer files
+*.cab
+*.msi
+*.msp
+
+# JetBrains Rider
+.idea/
+
+# DotCover
+.idea/
+
+# Coverage files
+*.coverage
+
+# User-specific config for Visual Studio
+.vs2019/
+
+# Node.js
+node_modules/
+npm-debug.log
+
+# Bower components
+bower_components/
+
+# Visual Studio for Mac
+.vscode/

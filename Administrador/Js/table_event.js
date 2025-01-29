@@ -46,7 +46,6 @@ const gridOptions = {
         sortable: true,
     },
     onFirstDataRendered: function (params) {
-        console.log("Datos cargados en la grid"); // Esto indica que los datos están listos
         const allColumns = params.columnApi.getColumns();
         params.columnApi.autoSizeColumns(allColumns);
     },
@@ -57,8 +56,7 @@ const gridOptions = {
         params.api.sizeColumnsToFit(cardWidth);
     },
     getRowId: function (params) {
-        console.log("id:", params.data.NroDocumento, typeof params.data.NroDocumento);
-        return String(params.data.NroDocumento).trim(); // Asegura que el id tenga 4 dígitos
+        return String(params.data.NroDocumento).trim();
     },
 };
 
@@ -77,38 +75,48 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => console.error('Error al cargar los datos:', error));
 });
 
-
-
-
 // Función para editar el usuario
 function editUser(id) {
     const idUsuario = String(id);
-    //console.log("id:", idUsuario, typeof idUsuario);
-    //let rowNode = gridOptions.api.getRowNode(String(idUsuario));
-    //if (rowNode) {
-    //    let fila = rowNode.data;
 
-    //    let modal = new bootstrap.Modal(document.getElementById('modalUsuario'));
-    //    modal.show();
-
-    //} else {
-
-    //}
     fetch('/User/findByDoc', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ nroDoc: id })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nroDoc: idUsuario })
     })  .then(response => response.json())
         .then(data => {
-            showModal(data)
+            showModal(data);
         })
         .catch(error => {
-            console.error('Error:', error); // Manejar cualquier error
+            console.error('Error:', error);
             alert('Hubo un problema al procesar la solicitud.');
+        })
+        .finally(() => {
+            //clearModal();
         });
 
+}
+
+
+function showModal(data) {
+    let modalElement = document.getElementById('modalUsuario'); 
+    let modal = new bootstrap.Modal(modalElement);
+
+    let fecha = new Date(parseInt(data.FechaNacimiento.replace(/\/Date\((.*?)\)\//, "$1")));
+    let fechaFormateada = fecha.toISOString().split('T')[0];
+    document.getElementById('tipoDocumento').value = data.TipoDoc.Nombre;
+    document.getElementById('nmroDocumento').value = data.NroDocumento;
+    document.getElementById('nombreUsuario').value = data.Nombres;
+    document.getElementById('apellidoUsuario').value = data.Apellidos;
+    document.getElementById('lNacimiento').value = data.LugarNacimiento;
+    document.getElementById('fNacimiento').value = fechaFormateada
+    document.getElementById('direccion').value = data.Direccion;
+    document.getElementById('rolUsuario').value = data.Roles[0].NameRol;
+    document.getElementById('email').value = data.Email;
+    document.getElementById('username').value = data.Username;
+    document.getElementById('password').value = data.Password;
+    document.getElementById('activo').value = data.Estado;
+    modal.show();
 }
 
 
@@ -118,21 +126,4 @@ function deleteUser(id) {
         alert(`Usuario con ID ${id} eliminado.`);
         // Aquí realiza una solicitud a tu API para eliminar el usuario
     }
-}
-
-function showModal(data) {
-    let modal = new bootstrap.Modal(document.getElementById('modalUsuario'));
-    //modal.getElementById('tipoDocumento') = data.
-    modal.getElementById('nmroDocumento') = data.NroDocumento
-    modal.getElementById('nombreUsuario') = data.Nombres
-    modal.getElementById('apellidoUsuario') = data.Apellidos
-    modal.getElementById('lNacimiento') = data.LugarNacimiento
-    modal.getElementById('fNacimiento') = data.FechaNacimiento
-    modal.getElementById('Direccion') = data.Direccion
-    modal.getElementById('rolUsuario') = data.rol.nombreRol
-    modal.getElementById('email') = data.Email
-    modal.getElementById('username') = data.Username
-    modal.getElementById('password') = data.Password
-    modal.getElementById('activo') = data.Estado
-    modal.show();
 }

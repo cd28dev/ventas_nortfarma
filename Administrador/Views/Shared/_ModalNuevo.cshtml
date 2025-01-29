@@ -1,97 +1,107 @@
-﻿<div class="modal fade" id="modalUsuario" tabindex="-1" aria-labelledby="modalUsuarioLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title" id="modalUsuarioLabel">Datos Personales</h5>
-                <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body g-2">
-                <!-- Sección Datos Personales -->
-                <div id="seccionDatosPersonales">
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label for="tipoDocumento" class="form-label">Tipo de Documento</label>
-                            <select class="form-select" id="tipoDocumento">
-                                <option value="Dni">DNI</option>
-                                <option value="Ruc">RUC</option>
-                                <option value="CE">Carné de Extranjería</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="nmroDocumento" class="form-label">N° Documento</label>
-                            <input type="text" class="form-control" id="nmroDocumento" required>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label for="nombreUsuario" class="form-label">Nombres</label>
-                            <input type="text" class="form-control" id="nombreUsuario" required>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="apellidoUsuario" class="form-label">Apellidos</label>
-                            <input type="text" class="form-control" id="apellidoUsuario" required>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="lNacimiento" class="form-label">Lugar de Nacimiento</label>
-                            <input type="text" class="form-control" id="lNacimiento" required>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="fNacimiento" class="form-label">Fecha de Nacimiento</label>
-                            <input type="date" class="form-control" id="fNacimiento" required>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="direccion" class="form-label">Direccion</label>
-                            <input type="text" class="form-control" id="Direccion" required>
-                        </div>
-                    </div>
+﻿<div>
+    <div class="modal fade" id="modalUsuario" tabindex="-1" aria-labelledby="modalUsuarioLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="modalUsuarioLabel">Datos Personales</h5>
+                    <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
-                <!-- Sección Datos de Usuario (Oculta por defecto) -->
-                <div id="seccionDatosUsuario" style="display: none;">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label for="rolUsuario" class="form-label">Rol</label>
-                            <select class="form-select" id="rolUsuario">
-                                <option value="Admin">Administrador</option>
-                                <option value="Cliente">Cliente</option>
-                            </select>
+                <div class="modal-body g-2">
+                    <!-- Sección Datos Personales -->
+                    <div id="seccionDatosPersonales">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="tipoDocumento" class="form-label">Tipo de Documento</label>
+                                <select class="form-select" id="tipoDocumento">
+                                    <option value="dni">DNI</option>
+                                    <option value="ruc">RUC</option>
+                                    <option value="ce">Carné de Extranjería</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="nmroDocumento" class="form-label">N° Documento</label>
+                                <input type="text" class="form-control" id="nmroDocumento" required>
+                            </div>
                         </div>
-                        <div class="col-sm-6">
-                            <label for="email" class="form-label">Correo</label>
-                            <input type="email" class="form-control" id="email" required>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="nombreUsuario" class="form-label">Nombres</label>
+                                <input type="text" class="form-control" id="nombreUsuario" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="apellidoUsuario" class="form-label">Apellidos</label>
+                                <input type="text" class="form-control" id="apellidoUsuario" required>
+                            </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="lNacimiento" class="form-label">Lugar de Nacimiento</label>
+                                <input type="text" class="form-control" id="lNacimiento" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="fNacimiento" class="form-label">Fecha de Nacimiento</label>
+                                <input type="date" class="form-control" id="fNacimiento" required>
+                            </div>
+                        </div>
 
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="direccion" class="form-label">Dirección</label>
+                                <input type="text" class="form-control" id="direccion" required>
+                            </div>
+                        </div>
+                    </div> <!-- Fin de seccionDatosPersonales -->
+                    <!-- Sección Datos de Usuario (Oculta por defecto) -->
+                    <div id="seccionDatosUsuario" style="display: none;">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="rolUsuario" class="form-label">Rol</label>
+                                <select class="form-select" id="rolUsuario">
+                                    <option value="Administrador">Administrador</option>
+                                    <option value="Cliente">Cliente</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="email" class="form-label">Correo</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="username" class="form-label">Nombre de Usuario</label>
+                                <input type="text" class="form-control" id="username" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="password" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="activo" class="form-label">Activo</label>
+                                <select class="form-select" id="activo">
+                                    <option value="Si">Si</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div> <!-- Fin de seccionDatosUsuario -->
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btnAtras" style="display: none;">Atrás</button>
+                        <button type="button" class="btn btn-primary" id="btnSiguiente">Siguiente</button>
+                        <button type="button" class="btn btn-success" id="btnGuardar" style="display: none;">Guardar</button>
+                        <button type="button" class="btn btn-warning" id="btnActualizar" style="display: none;">Actualizar</button> 
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label for="username" class="form-label">Nombre de Usuario</label>
-                            <input type="text" class="form-control" id="username" required>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" required>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="activo" class="form-label">Activo</label>
-                            <select class="form-select" id="activo">
-                                <option value="1">Si</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
-
-
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="btnAtras" style="display: none;">Atrás</button>
-                    <button type="button" class="btn btn-primary" id="btnSiguiente">Siguiente</button>
-                    <button type="button" class="btn btn-success" id="btnGuardar" style="display: none;">Guardar</button>
-                </div>
-            </div>
+                </div> <!-- Fin de modal-body -->
+            </div> <!-- Fin de modal-content -->
+        </div> <!-- Fin de modal-dialog -->
+    </div> <!-- Fin de modal -->
+</div> <!-- Fin del contenedor principal -->
 
 <script src="~/js/modal_nuevo.js"></script>
-
+<script src="~/js/table_event.js"></script>

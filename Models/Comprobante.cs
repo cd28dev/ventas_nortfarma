@@ -8,17 +8,17 @@ namespace Models
         public string IdComprobante { get; set; }
         public string NroComprobante { get; set; }
         public DateTime FechaEmision { get; set; }
-        public string IdTipoComprobante { get; set; }
-        public string IdPago { get; set; }
+        public TipoComprobante tipoComprobante { get; set; }
+        public Pago pago { get; set; }
 
         // Constructor
-        public Comprobante(string idComprobante, string nroComprobante, DateTime fechaEmision, string idTipoComprobante, string idPago)
+        public Comprobante(string idComprobante, string nroComprobante, DateTime fechaEmision, TipoComprobante tc, Pago pago)
         {
             IdComprobante = idComprobante;
             NroComprobante = nroComprobante;
             FechaEmision = fechaEmision;
-            IdTipoComprobante = idTipoComprobante;
-            IdPago = idPago;
+            this.tipoComprobante = tc;
+            this.pago = pago;
         }
     }
 }

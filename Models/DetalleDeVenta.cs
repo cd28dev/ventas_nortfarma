@@ -8,27 +8,21 @@ namespace Models
         public int Cantidad { get; set; }
         public double Descuento { get; set; }
         public double Subtotal { get; set; }
-        public string IdVenta { get; set; }
+        public Venta venta { get; set; }
+
+        public Producto producto { get; set; }
+
+        public Anulacion anulacion { get; set; }
 
         // Constructor con validación
-        public DetalleDeVenta(string idDetalleVenta, int cantidad, double descuento, double subtotal, string idVenta)
+        public DetalleDeVenta(string idDetalleVenta, int cantidad, double descuento, double subtotal, Venta v)
         {
-            if (string.IsNullOrWhiteSpace(idDetalleVenta))
-                throw new ArgumentException("El ID del detalle de venta no puede estar vacío.");
-            if (cantidad <= 0)
-                throw new ArgumentException("La cantidad debe ser mayor que cero.");
-            if (descuento < 0)
-                throw new ArgumentException("El descuento no puede ser negativo.");
-            if (subtotal < 0)
-                throw new ArgumentException("El subtotal no puede ser negativo.");
-            if (string.IsNullOrWhiteSpace(idVenta))
-                throw new ArgumentException("El ID de la venta no puede estar vacío.");
 
             IdDetalleVenta = idDetalleVenta;
             Cantidad = cantidad;
             Descuento = descuento;
             Subtotal = subtotal;
-            IdVenta = idVenta;
+            venta = v;
         }
     }
 }

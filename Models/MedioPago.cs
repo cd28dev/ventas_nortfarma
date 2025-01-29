@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Models
 {
@@ -8,6 +9,7 @@ namespace Models
         public string Nombre { get; set; }
         public string Estado { get; set; }
 
+        public List<DetalleDePago>  detalleDePagos { get; set; }
         // Constructor con validación
         public MedioPago(string idMedio, string nombre, string estado)
         {
@@ -21,6 +23,15 @@ namespace Models
             IdMedio = idMedio;
             Nombre = nombre;
             Estado = estado;
+        }
+
+        public MedioPago() { 
+            this.detalleDePagos = new List<DetalleDePago>();
+        }
+
+
+        private void add(DetalleDePago detalleDePago) { 
+            detalleDePagos.Add(detalleDePago);
         }
     }
 }

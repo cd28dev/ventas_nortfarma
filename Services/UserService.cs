@@ -20,7 +20,7 @@ namespace Services
         {
             Usuario user = new Usuario();
             user = userData.findById(nroDoc);
-
+            
             if (user.Estado.Equals("0"))
             {
                 user.Estado = "No";

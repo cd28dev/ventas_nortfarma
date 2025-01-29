@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Models
 {
@@ -8,25 +9,24 @@ namespace Models
         public DateTime FechaRecojo { get; set; }
         public string DireccionEntrega { get; set; }
         public string Estado { get; set; }
-        public string IdCarritoCompra { get; set; }
+        public CarritoCompra carrito { get; set; }
+
+        public List<Venta> Ventas { get; set; }
 
         // Constructor con validación
-        public Pedido(string idPedido, DateTime fechaRecojo, string direccionEntrega, string estado, string idCarritoCompra)
+        public Pedido(string idPedido, DateTime fechaRecojo, string direccionEntrega, string estado, CarritoCompra c)
         {
-            if (string.IsNullOrWhiteSpace(idPedido))
-                throw new ArgumentException("El ID del pedido no puede estar vacío.");
-            if (string.IsNullOrWhiteSpace(direccionEntrega))
-                throw new ArgumentException("La dirección de entrega no puede estar vacía.");
-            if (string.IsNullOrWhiteSpace(estado))
-                throw new ArgumentException("El estado no puede estar vacío.");
-            if (string.IsNullOrWhiteSpace(idCarritoCompra))
-                throw new ArgumentException("El ID del carrito de compra no puede estar vacío.");
 
             IdPedido = idPedido;
             FechaRecojo = fechaRecojo;
             DireccionEntrega = direccionEntrega;
             Estado = estado;
-            IdCarritoCompra = idCarritoCompra;
+            carrito = c;
+        }
+
+        public Pedido() { 
+        
+            this.Ventas = new List<Venta>();
         }
     }
 }

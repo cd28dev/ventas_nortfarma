@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Models
 {
@@ -7,6 +8,8 @@ namespace Models
         public string IdTipoEmpleado { get; set; }
         public string NombreTipo { get; set; }
         public string Estado { get; set; }
+
+        public List<Empleado> empleados { get; set; }
 
         // Constructor con validación
         public TipoEmpleado(string idTipoEmpleado, string nombreTipo, string estado)
@@ -21,6 +24,8 @@ namespace Models
         }
 
         // Constructor vacío (opcional)
-        public TipoEmpleado() { }
+        public TipoEmpleado() { 
+            empleados = new List<Empleado>();
+        }
     }
 }

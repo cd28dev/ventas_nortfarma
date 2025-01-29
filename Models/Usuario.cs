@@ -19,7 +19,7 @@ namespace Models
         // Constructor
         public Usuario(string idUsuario, string idPersona, string username, string password, string estado,
                        string nombres, string apellidos, string nroDocumento, string email, string telefono,
-                       DateTime fechaNacimiento, string lugarNacimiento, string direccion, string estadoPersona, string idTipoDoc)
+                       DateTime fechaNacimiento, string lugarNacimiento, string direccion, string estadoPersona, TipoDocumento idTipoDoc)
             : base(idPersona, nombres, apellidos, nroDocumento, telefono, fechaNacimiento, lugarNacimiento, direccion, idTipoDoc)
         {
             this.IdUsuario = idUsuario;
@@ -30,7 +30,8 @@ namespace Models
         }
 
         // Constructor vacío
-        public Usuario() { 
+        public Usuario() {
+            Roles = new List<Rol>();
         }
 
         // Método para cifrar contraseñas de forma segura usando PBKDF2

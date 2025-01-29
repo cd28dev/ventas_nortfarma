@@ -2,6 +2,7 @@
 using Services;
 using System;
 using System.Collections.Generic;
+using System.Web.Http;
 using System.Web.Mvc;
 
 namespace Administrador.Controllers
@@ -10,7 +11,7 @@ namespace Administrador.Controllers
     {
         private IUserService userService;
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public JsonResult ListarUsuarios()
         {
             userService = new UserService();
@@ -21,8 +22,8 @@ namespace Administrador.Controllers
             return Json(users, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        public JsonResult findByDoc(string nroDoc)
+        [System.Web.Mvc.HttpPost]
+        public JsonResult findByDoc([FromBody] string nroDoc)
         {
             userService = new UserService();
             Usuario user = new Usuario();

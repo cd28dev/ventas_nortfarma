@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Models
 {
@@ -8,63 +9,31 @@ namespace Models
         public DateTime Fecha { get; set; }
         public double Total { get; private set; }
         public string Estado { get; private set; }
-        public string IdPedido { get; private set; }
-        public string IdFarmacia { get; private set; }
-        public string IdEmpleado { get; private set; }
+        public Pedido pedido { get; private set; }
+        public Farmacia farmacia { get; private set; }
+        public Empleado empleado { get; private set; }
+
+        public List<Pago> pagos { get; private set; }
+        public List<DetalleDeVenta> detalleDeVentas { get; private set; }
+
+        public Anulacion anulacion { get; private set; }
 
         // Constructor
-        public Venta(string idVenta, DateTime fecha, double total, string estado, string idPedido, string idFarmacia, string idEmpleado)
+        public Venta(string idVenta, DateTime fecha, double total, string estado, Pedido p, Farmacia f, Empleado e)
         {
-            SetIdVenta(idVenta);
-            Fecha = fecha;
-            SetTotal(total);
-            SetEstado(estado);
-            SetIdPedido(idPedido);
-            SetIdFarmacia(idFarmacia);
-            SetIdEmpleado(idEmpleado);
+            this.IdVenta = idVenta;
+            this.Fecha = fecha;
+            this.Total = total;
+            this.Estado = estado;
+            this.pedido = p;
+            this.farmacia = f;
+            this.empleado = e;
         }
 
-        // Métodos de validación
-        public void SetIdVenta(string value)
-        {
-            if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentException("El ID de la venta no puede estar vacío.");
-            IdVenta = value;
-        }
 
-        public void SetTotal(double value)
-        {
-            if (value < 0)
-                throw new ArgumentException("El total no puede ser negativo.");
-            Total = value;
-        }
-
-        public void SetEstado(string value)
-        {
-            if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentException("El estado no puede estar vacío.");
-            Estado = value;
-        }
-
-        public void SetIdPedido(string value)
-        {
-            if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentException("El ID del pedido no puede estar vacío.");
-            IdPedido = value;
-        }
-
-        public void SetIdFarmacia(string value)
-        {
-            if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentException("El ID de la farmacia no puede estar vacío.");
-            IdFarmacia = value;
-        }
-
-        public void SetIdEmpleado(string value)
-        {
-            if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentException("El ID del empleado no puede estar vacío.");
-            IdEmpleado = value;
+        public Venta() { 
+            pagos = new List<Pago>();
+            detalleDeVentas = new List<DetalleDeVenta>();
         }
     }
 }

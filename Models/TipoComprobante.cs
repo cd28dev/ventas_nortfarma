@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Models
 {
@@ -6,6 +7,8 @@ namespace Models
     {
         public string IdTipoComprobante { get; set; }
         public string NombreTipo { get; set; }
+
+        public List<Comprobante> comprobantes { get; set; }
 
         // Constructor con validación
         public TipoComprobante(string idTipoComprobante, string nombreTipo)
@@ -18,6 +21,13 @@ namespace Models
         }
 
         // Constructor vacío (opcional, por si necesitas crear instancias vacías)
-        public TipoComprobante() { }
+        public TipoComprobante() {
+            comprobantes = new List<Comprobante>();
+        }
+
+        private void add(Comprobante comprobante) { 
+            comprobantes.Add(comprobante);
+        }
+
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Models
+﻿using System.Collections.Generic;
+
+namespace Models
 {
     public class CategoriaProducto
     {
@@ -7,8 +9,13 @@
         public string Descripcion { get; set; }
         public string Estado { get; set; }
 
+        public List<Producto> Productos { get; set; }
+
         // Constructor vacío
-        public CategoriaProducto() { }
+        public CategoriaProducto() { 
+            Productos = new List<Producto>();
+            
+        }
 
         // Constructor lleno
         public CategoriaProducto(string idCategoria, string descripcion, string estado)
