@@ -24,17 +24,33 @@
         colId: "Accion",
         flex: 1,
         cellRenderer: function (params) {
-            const idUsuario = String(params.data.NroDocumento);
-            return `
-                <button class="btn btn-primary btn-sm me-2" onclick="editUser(${idUsuario})">
-                <i class="fas fa-pen"></i>
-                </button>
-                <button class="btn btn-danger btn-sm" onclick="deleteUser(${params.data.IdUsuario})">
-                <i class="fas fa-trash-alt"></i>
-                </button>
-            `;
+            // Crear contenedor para los botones
+            const container = document.createElement('div');
+            container.classList.add('d-flex', 'align-items-center');
+
+            // Botón Editar
+            const btnEditar = document.createElement('button');
+            btnEditar.classList.add('btn', 'btn-primary', 'btn-sm', 'me-2');
+            btnEditar.innerHTML = `<i class="fas fa-pen"></i>`;
+            btnEditar.addEventListener('click', () => {
+                editUser(params.data.NroDocumento); // Llamada a la función editUser
+            });
+
+            const btnEliminar = document.createElement('button');
+            btnEliminar.classList.add('btn', 'btn-danger', 'btn-sm');
+            btnEliminar.innerHTML = `<i class="fas fa-trash-alt"></i>`;
+            btnEliminar.addEventListener('click', () => {
+                deleteUser(params.data.IdUsuario); // Llamada a la función deleteUser
+            });
+
+            // Agregar botones al contenedor
+            container.appendChild(btnEditar);
+            container.appendChild(btnEliminar);
+
+            return container;
         }
     }
+
 ];
 
 const gridOptions = {
@@ -99,12 +115,42 @@ function editUser(id) {
 
 
 function showModal(data) {
-    let modalElement = document.getElementById('modalUsuario'); 
+    let modalElement = document.getElementById('modalUsuario');
     let modal = new bootstrap.Modal(modalElement);
 
+    showBtnUpdate(); // Asegurar que se muestra el botón correcto
+    llenarFields(data);
+
+    modal.show();
+}
+
+
+
+function deleteUser(id) {
+    let deleteId = id; 
+    let confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+    let btnConfirmDelete = document.getElementById("btnConfirmDelete");
+
+    confirmDeleteModal.show();
+
+    btnConfirmDelete.addEventListener("click", function () {
+        if (deleteId !== null) {
+            fetch(`/User/Delete/${deleteId}`, { method: 'DELETE' })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Usuario eliminado:", data);
+                    confirmDeleteModal.hide();
+                })
+                .catch(error => console.error("Error al eliminar:", error));
+        }
+    });
+
+}
+
+function llenarFields(data) {
     let fecha = new Date(parseInt(data.FechaNacimiento.replace(/\/Date\((.*?)\)\//, "$1")));
     let fechaFormateada = fecha.toISOString().split('T')[0];
-    
+
     document.getElementById('tipoDocumento').value = data.TipoDoc.Nombre;
     document.getElementById('nmroDocumento').value = data.NroDocumento;
     document.getElementById('nombreUsuario').value = data.Nombres;
@@ -117,15 +163,29 @@ function showModal(data) {
     document.getElementById('username').value = data.Username;
     document.getElementById('password').value = data.Password;
     document.getElementById('activo').value = data.Estado;
-
-    modal.show();
 }
+function showBtnUpdate() {
+    const seccionDatosPersonales = document.getElementById("seccionDatosPersonales");
+    const seccionDatosUsuario = document.getElementById("seccionDatosUsuario");
+    const btnSave = document.getElementById('btnGuardar');
+    const btnUpdate = document.getElementById('btnActualizar');
+    const btnSiguiente2 = document.getElementById("btnSiguiente2");
+    const btnSiguiente1 = document.getElementById("btnSiguiente1");
+    const btnAtras2 = document.getElementById("btnAtras2");
+    const btnAtras1 = document.getElementById("btnAtras1");
+    const modalTitle = document.getElementById("modalUsuarioLabel");
 
+    seccionDatosPersonales.style.display = "block";
+    seccionDatosUsuario.style.display = "none";
 
-function deleteUser(id) {
-    const confirmacion = confirm(`¿Estás seguro de eliminar al usuario con ID: ${id}?`);
-    if (confirmacion) {
-        alert(`Usuario con ID ${id} eliminado.`);
-        // Aquí realiza una solicitud a tu API para eliminar el usuario
-    }
+    // Botones visibles en la primera sección
+    btnSiguiente2.style.display = "inline-block";
+    btnSiguiente1.style.display = "none";
+    btnAtras2.style.display = "none";
+    btnAtras1.style.display = "none";
+
+    btnSave.style.display = "none";
+    btnUpdate.style.display = "none";
+
+    modalTitle.textContent = "Datos Personales"; // Restablecer título
 }

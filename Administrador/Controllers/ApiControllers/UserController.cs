@@ -2,19 +2,25 @@
 using Services;
 using System;
 using System.Collections.Generic;
-using System.Web.Http;
 using System.Web.Mvc;
 
 namespace Administrador.Controllers
 {
+
     public class UserController : Controller
     {
         private IUserService userService;
 
-        [System.Web.Mvc.HttpGet]
+
+        public UserController()
+        {
+            this.userService = new UserService();
+        }
+
+
+        [HttpGet]
         public JsonResult ListarUsuarios()
         {
-            userService = new UserService();
             List<Usuario> users = new List<Usuario>();
 
             users = userService.Listar();
@@ -22,15 +28,21 @@ namespace Administrador.Controllers
             return Json(users, JsonRequestBehavior.AllowGet);
         }
 
-        [System.Web.Mvc.HttpPost]
-        public JsonResult findByDoc([FromBody] string nroDoc)
+        [HttpPost]
+        public JsonResult findByDoc(string nroDoc)
         {
-            userService = new UserService();
             Usuario user = new Usuario();
             user = userService.findByDoc(nroDoc);
 
             return Json(user);
 
+        }
+
+        [HttpDelete]
+        public JsonResult Delete(string id)
+        {
+            bool resultado = userService.Eliminar(id);
+            return Json(new { success = resultado });
         }
 
     }

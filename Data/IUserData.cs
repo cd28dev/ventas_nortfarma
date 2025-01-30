@@ -12,5 +12,7 @@ namespace Data
         List<Usuario> Listar();
 
         Usuario findById(string id);
+
+        bool deleteById(string id)
     }
 }
