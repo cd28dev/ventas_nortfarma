@@ -5,6 +5,10 @@
 [Dd]ist/
 [Dd]ebugFinal/
 
+# Ignorar carpetas de compilación de C#
+**/bin/
+**/obj/
+
 # User-specific files
 .vs/
 .vscode/
