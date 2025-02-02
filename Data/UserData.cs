@@ -18,6 +18,11 @@ namespace Data
             connection = new Connection();
         }
 
+        public bool deleteById(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Usuario findById(string nroDoc)
         {
             Usuario user = new Usuario();

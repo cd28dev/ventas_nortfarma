@@ -41,8 +41,8 @@ namespace Administrador.Controllers
         [HttpDelete]
         public JsonResult Delete(string id)
         {
-            bool resultado = userService.Eliminar(id);
-            return Json(new { success = resultado });
+            //bool resultado = userService.Eliminar(id);
+            return Json(new { success = "" });
         }
 
     }
