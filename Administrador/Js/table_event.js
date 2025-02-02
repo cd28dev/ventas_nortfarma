@@ -24,26 +24,28 @@
         colId: "Accion",
         flex: 1,
         cellRenderer: function (params) {
-            // Crear contenedor para los botones
             const container = document.createElement('div');
             container.classList.add('d-flex', 'align-items-center');
 
-            // Botón Editar
             const btnEditar = document.createElement('button');
             btnEditar.classList.add('btn', 'btn-primary', 'btn-sm', 'me-2');
             btnEditar.innerHTML = `<i class="fas fa-pen"></i>`;
             btnEditar.addEventListener('click', () => {
-                editUser(params.data.NroDocumento); // Llamada a la función editUser
+                editUser(params.data.NroDocumento); 
             });
 
             const btnEliminar = document.createElement('button');
             btnEliminar.classList.add('btn', 'btn-danger', 'btn-sm');
             btnEliminar.innerHTML = `<i class="fas fa-trash-alt"></i>`;
-            btnEliminar.addEventListener('click', () => {
-                deleteUser(params.data.IdUsuario); // Llamada a la función deleteUser
-            });
+            console.log("Estado del usuario:", params.data.Estado);
 
-            // Agregar botones al contenedor
+            if (params.data.Estado === 'No') {
+                btnEliminar.disabled = "true";
+            } else {
+                btnEliminar.addEventListener('click', () => {
+                    deleteUser(params.data.NroDocumento);
+                });
+            }
             container.appendChild(btnEditar);
             container.appendChild(btnEliminar);
 
@@ -91,7 +93,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => console.error('Error al cargar los datos:', error));
 });
 
-// Función para editar el usuario
 function editUser(id) {
     const idUsuario = String(id);
 
@@ -113,6 +114,30 @@ function editUser(id) {
 
 }
 
+function deleteUser(id) {
+    let deleteId = id;
+    let confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+    let btnConfirmDelete = document.getElementById("btnConfirmDelete");
+
+    cambiarMensajeModal(deleteId);
+    confirmDeleteModal.show();
+
+    btnConfirmDelete.removeEventListener("click", handleDelete);
+
+    function handleDelete() {
+        if (deleteId !== null) {
+            fetch(`/User/Delete/${deleteId}`, { method: 'DELETE' })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Usuario eliminado:", data);
+                    confirmDeleteModal.hide();
+                })
+                .catch(error => console.error("Error al eliminar:", error));
+        }
+    }
+
+    btnConfirmDelete.addEventListener("click", handleDelete);
+}
 
 function showModal(data) {
     let modalElement = document.getElementById('modalUsuario');
@@ -123,29 +148,15 @@ function showModal(data) {
 
     modal.show();
 }
-
-
-
-function deleteUser(id) {
-    let deleteId = id; 
-    let confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
-    let btnConfirmDelete = document.getElementById("btnConfirmDelete");
-
-    confirmDeleteModal.show();
-
-    btnConfirmDelete.addEventListener("click", function () {
-        if (deleteId !== null) {
-            fetch(`/User/Delete/${deleteId}`, { method: 'DELETE' })
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Usuario eliminado:", data);
-                    confirmDeleteModal.hide();
-                })
-                .catch(error => console.error("Error al eliminar:", error));
-        }
-    });
-
+function cambiarMensajeModal(id) {
+    let modalBody = document.querySelector('.modal-body');
+    if (modalBody) {
+        modalBody.innerHTML = `¿Estás seguro de que deseas eliminar al usuario con dni <strong>${id}</strong>?`;
+    } else {
+        console.error('No se encontró el elemento con la clase .modal-body');
+    }
 }
+
 
 function llenarFields(data) {
     let fecha = new Date(parseInt(data.FechaNacimiento.replace(/\/Date\((.*?)\)\//, "$1")));
@@ -164,6 +175,8 @@ function llenarFields(data) {
     document.getElementById('password').value = data.Password;
     document.getElementById('activo').value = data.Estado;
 }
+
+
 function showBtnUpdate() {
     const seccionDatosPersonales = document.getElementById("seccionDatosPersonales");
     const seccionDatosUsuario = document.getElementById("seccionDatosUsuario");
@@ -178,7 +191,6 @@ function showBtnUpdate() {
     seccionDatosPersonales.style.display = "block";
     seccionDatosUsuario.style.display = "none";
 
-    // Botones visibles en la primera sección
     btnSiguiente2.style.display = "inline-block";
     btnSiguiente1.style.display = "none";
     btnAtras2.style.display = "none";

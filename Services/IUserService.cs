@@ -12,5 +12,7 @@ namespace Services
     {
         List<Usuario> Listar();
         Usuario findByDoc(string nroDoc);
+
+        int deleteById(string nroDoc);
     }
 }

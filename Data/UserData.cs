@@ -18,10 +18,32 @@ namespace Data
             connection = new Connection();
         }
 
-        public bool deleteById(string id)
+        public int deleteById(string nroDoc)
         {
-            throw new NotImplementedException();
+            int row = 0;
+
+            try
+            {
+                connection.OpenConnection();
+                connection.SetSqlCommand("sp_DeleteByDoc");
+                connection.SetCommandType(CommandType.StoredProcedure, "@nroDoc", nroDoc);
+                connection.SetCommandType(CommandType.StoredProcedure, "@resultado", string.Empty, SqlDbType.Int, ParameterDirection.Output);
+                connection.executeNonQuery();
+                row = (int)connection.GetOutputParameterValue("@resultado");
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("Error al ejecutar la consulta: " + ex.Message);
+            }
+            finally
+            {
+                // Liberar los recursos
+                connection.Dispose();
+            }
+
+            return row;
         }
+
 
         public Usuario findById(string nroDoc)
         {

@@ -11,16 +11,10 @@ namespace Administrador.Controllers
     {
         private IUserService userService;
 
-
-        public UserController()
-        {
-            this.userService = new UserService();
-        }
-
-
         [HttpGet]
         public JsonResult ListarUsuarios()
         {
+            this.userService = new UserService();
             List<Usuario> users = new List<Usuario>();
 
             users = userService.Listar();
@@ -31,6 +25,8 @@ namespace Administrador.Controllers
         [HttpPost]
         public JsonResult findByDoc(string nroDoc)
         {
+            this.userService = new UserService();
+
             Usuario user = new Usuario();
             user = userService.findByDoc(nroDoc);
 
@@ -41,8 +37,27 @@ namespace Administrador.Controllers
         [HttpDelete]
         public JsonResult Delete(string id)
         {
-            //bool resultado = userService.Eliminar(id);
-            return Json(new { success = "" });
+            this.userService = new UserService();
+            Usuario usuario = new Usuario();
+            string message = "Usuario no encontrado";
+            bool response = false;
+
+            if (userService.deleteById(id) == 1)
+            {
+                this.userService = new UserService();
+                message = "Usuario eliminado correctamente";
+                usuario = userService.findByDoc(id);
+                response = true;
+            }
+            return Json(new { success = response, message = message, deletedUser = usuario });
+        }
+
+        [HttpPost]
+        public JsonResult SaveUser(Usuario usuario) {
+
+            this.userService = new UserService();
+
+            return Json(user);
         }
 
     }

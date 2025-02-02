@@ -13,6 +13,6 @@ namespace Data
 
         Usuario findById(string id);
 
-        bool deleteById(string id);
+        int deleteById(string id);
     }
 }

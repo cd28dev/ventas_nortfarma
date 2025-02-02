@@ -16,6 +16,12 @@ namespace Services
             userData = new UserData();
         }
 
+        public int deleteById(string nroDoc)
+        {
+            int row=userData.deleteById(nroDoc);
+            return row;
+        }
+
         public Usuario findByDoc(string nroDoc)
         {
             Usuario user = new Usuario();

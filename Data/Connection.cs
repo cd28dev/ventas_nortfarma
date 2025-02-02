@@ -12,6 +12,7 @@ namespace Data
         private SqlConnection _connection;
         private SqlCommand command;
         private SqlDataReader reader;
+        private int row;
 
         public Connection()
         {
@@ -61,6 +62,12 @@ namespace Data
             this.reader = this.command.ExecuteReader();
         }
 
+        public int executeNonQuery()
+        {
+            row = this.command.ExecuteNonQuery();
+            return row;
+        }
+
         public SqlConnection GetConnection() { 
             return _connection; 
         }
@@ -74,6 +81,25 @@ namespace Data
         {
             this.command.CommandType = ct;
             this.command.Parameters.AddWithValue(nameVar, input);
+        }
+
+        public void SetCommandType(CommandType ct, string nameVar, string input, SqlDbType type = SqlDbType.VarChar, ParameterDirection direction = ParameterDirection.Input)
+        {
+            this.command.CommandType = ct;
+
+            // Agregar el parámetro con tipo y dirección
+            SqlParameter param = new SqlParameter(nameVar, type)
+            {
+                Value = input,
+                Direction = direction
+            };
+            this.command.Parameters.Add(param);
+        }
+
+        // Método para obtener el valor de un parámetro de salida
+        public object GetOutputParameterValue(string parameterName)
+        {
+            return this.command.Parameters[parameterName].Value;
         }
     }
 
