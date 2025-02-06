@@ -28,7 +28,9 @@ namespace Models
             this.TipoDoc = tipoDoc;
         }
 
-        public Persona() { }
+        public Persona() {
+            this.TipoDoc = new TipoDocumento();
+        }
     }
 
 

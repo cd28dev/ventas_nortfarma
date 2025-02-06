@@ -14,5 +14,9 @@ namespace Services
         Usuario findByDoc(string nroDoc);
 
         int deleteById(string nroDoc);
+
+        bool saveUser(Usuario usuario);
+
+        Usuario lastUser();
     }
 }

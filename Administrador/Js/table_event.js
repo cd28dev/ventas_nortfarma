@@ -4,6 +4,7 @@
     { headerName: "Apellidos", field: "Apellidos", flex: 1 },
     { headerName: "Email", field: "Email", flex: 1 },
     { headerName: "Username", field: "Username", flex: 1 },
+    { headerName: "Rol", field: "Roles", valueGetter: (params) => params.data.Roles.length > 0 ? params.data.Roles[0].NameRol : "Sin rol", flex: 1 },
     {
         headerName: "Activo",
         field: "Estado",
@@ -37,13 +38,12 @@
             const btnEliminar = document.createElement('button');
             btnEliminar.classList.add('btn', 'btn-danger', 'btn-sm');
             btnEliminar.innerHTML = `<i class="fas fa-trash-alt"></i>`;
-            console.log("Estado del usuario:", params.data.Estado);
 
             if (params.data.Estado === 'No') {
                 btnEliminar.disabled = "true";
             } else {
                 btnEliminar.addEventListener('click', () => {
-                    deleteUser(params.data.NroDocumento);
+                    deleteUser(params.data.NroDocumento,btnEliminar);
                 });
             }
             container.appendChild(btnEditar);
@@ -114,7 +114,7 @@ function editUser(id) {
 
 }
 
-function deleteUser(id) {
+function deleteUser(id,btnEliminar) {
     let deleteId = id;
     let confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
     let btnConfirmDelete = document.getElementById("btnConfirmDelete");
@@ -129,8 +129,16 @@ function deleteUser(id) {
             fetch(`/User/Delete/${deleteId}`, { method: 'DELETE' })
                 .then(response => response.json())
                 .then(data => {
-                    console.log("Usuario eliminado:", data);
                     confirmDeleteModal.hide();
+                    fetch('/User/ListarUsuarios', {
+                        method: 'GET',
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            gridOptions.api.setRowData(data);
+                            btnEliminar.disabled = true;
+                        })
+                        .catch(error => console.error('Error al cargar los datos:', error));
                 })
                 .catch(error => console.error("Error al eliminar:", error));
         }
@@ -138,6 +146,7 @@ function deleteUser(id) {
 
     btnConfirmDelete.addEventListener("click", handleDelete);
 }
+
 
 function showModal(data) {
     let modalElement = document.getElementById('modalUsuario');
@@ -174,6 +183,7 @@ function llenarFields(data) {
     document.getElementById('username').value = data.Username;
     document.getElementById('password').value = data.Password;
     document.getElementById('activo').value = data.Estado;
+    document.getElementById('telefono').value = data.telefono;
 }
 
 

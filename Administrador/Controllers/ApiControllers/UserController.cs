@@ -54,10 +54,15 @@ namespace Administrador.Controllers
 
         [HttpPost]
         public JsonResult SaveUser(Usuario usuario) {
-
+            Usuario user = new Usuario();
             this.userService = new UserService();
 
-            return Json(user);
+            if (userService.saveUser(usuario)) {
+                this.userService = new UserService();
+                user = userService.lastUser();
+            }
+
+            return Json(new { success = true, userId = user.IdUsuario, message = "Usuario registrado exitosamente" });
         }
 
     }

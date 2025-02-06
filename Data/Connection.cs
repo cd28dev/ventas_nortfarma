@@ -101,6 +101,17 @@ namespace Data
         {
             return this.command.Parameters[parameterName].Value;
         }
+
+        public void AddParameter(string nameVar, SqlDbType type, int size, object value, ParameterDirection direction = ParameterDirection.Input)
+        {
+            SqlParameter param = new SqlParameter(nameVar, type, size)
+            {
+                Value = value,
+                Direction = direction
+            };
+            this.command.Parameters.Add(param);
+        }
+
     }
 
 }

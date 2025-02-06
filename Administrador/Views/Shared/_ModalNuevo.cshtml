@@ -13,9 +13,8 @@
                             <div class="col-sm-6">
                                 <label for="tipoDocumento" class="form-label">Tipo de Documento</label>
                                 <select class="form-select" id="tipoDocumento">
-                                    <option value="dni">DNI</option>
-                                    <option value="ruc">RUC</option>
-                                    <option value="ce">Carné de Extranjería</option>
+                                    <option value="1">DNI</option>
+                                    <option value="2">RUC</option>
                                 </select>
                             </div>
                             <div class="col-sm-6">
@@ -51,6 +50,10 @@
                                 <label for="direccion" class="form-label">Dirección</label>
                                 <input type="text" class="form-control" id="direccion" required>
                             </div>
+                            <div class="col-sm-6">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="text" class="form-control" id="telefono" required>
+                            </div>
                         </div>
                     </div> <!-- Fin de seccionDatosPersonales -->
                     <!-- Sección Datos de Usuario (Oculta por defecto) -->
@@ -59,8 +62,8 @@
                             <div class="col-sm-6">
                                 <label for="rolUsuario" class="form-label">Rol</label>
                                 <select class="form-select" id="rolUsuario">
-                                    <option value="Administrador">Administrador</option>
-                                    <option value="Cliente">Cliente</option>
+                                    <option value="0001">Administrador</option>
+                                    <option value="0002">Cliente</option>
                                 </select>
                             </div>
                             <div class="col-sm-6">

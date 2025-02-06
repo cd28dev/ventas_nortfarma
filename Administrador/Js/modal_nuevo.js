@@ -75,8 +75,58 @@
     });
 
     btnGuardar.addEventListener("click", function () {
-       //fetch()
+        const usuario = {
+            Username: document.getElementById("username").value,
+            Password: document.getElementById("password").value,
+            Estado: document.getElementById("activo").value === "Si" ? "1" : "0",
+            Email: document.getElementById("email").value,
+            Nombres: document.getElementById("nombreUsuario").value,
+            Apellidos: document.getElementById("apellidoUsuario").value,
+            NroDocumento: document.getElementById("nmroDocumento").value,
+            Telefono: document.getElementById("telefono").value,
+            FechaNacimiento: document.getElementById("fNacimiento").value,
+            LugarNacimiento: document.getElementById("lNacimiento").value,
+            Direccion: document.getElementById("direccion").value,
+            TipoDoc: {
+                IdTipoDoc: document.getElementById("tipoDocumento").value
+            },
+            Roles: [{
+                IdRol: document.getElementById("rolUsuario").value
+            }]
+
+        };
+
+        fetch('/User/SaveUser', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(usuario)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    showSuccessModal();
+                    $('#modalUsuario').modal('hide');
+                    fetch('/User/ListarUsuarios', {
+                        method: 'GET',
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            gridOptions.api.setRowData(data);
+                        })
+                        .catch(error => console.error('Error al cargar los datos:', error));
+                } else {
+                    alert("Error al guardar el usuario");
+                }
+            })
+
+            .catch(error => console.error('Error:', error));
+
+       
     });
+
+
 
     // Desactivar el botón Guardar al inicio
     btnGuardar.disabled = true;
@@ -133,6 +183,9 @@
         validarCampos();
     });
 
-
+    function showSuccessModal() {
+        var myModal = new bootstrap.Modal(document.getElementById('successModal'));
+        myModal.show();
+    }
     
 });

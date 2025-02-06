@@ -56,5 +56,24 @@ namespace Services
 
             return users;
         }
+
+        public bool saveUser(Usuario usuario)
+        {
+            if (usuario.Estado == "Si")
+            {
+                usuario.Estado = "1";
+            }
+            else if (usuario.Estado == "No")
+            {
+                usuario.Estado = "0";
+            }
+            bool isSaved = userData.saveUser(usuario);
+            return isSaved;
+        }
+
+        public Usuario lastUser()
+        {
+            return userData.lastUser();
+        }
     }
 }

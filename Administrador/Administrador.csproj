@@ -226,6 +226,7 @@
     <Content Include="Views\Mantenedor\Producto.cshtml" />
     <Content Include="Views\Shared\_ModalNuevo.cshtml" />
     <Content Include="Views\Shared\_ModalEliminacion.cshtml" />
+    <Content Include="Views\Shared\_ModalConfirmacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

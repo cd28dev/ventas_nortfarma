@@ -14,5 +14,9 @@ namespace Data
         Usuario findById(string id);
 
         int deleteById(string id);
+
+        bool saveUser(Usuario usuario);
+
+        Usuario lastUser();
     }
 }
