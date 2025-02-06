@@ -175,6 +175,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Js\api.js" />
+    <Content Include="Js\grid.js" />
+    <Content Include="Js\modal.js" />
     <Content Include="Js\modal_nuevo.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
