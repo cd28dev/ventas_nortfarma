@@ -14,19 +14,20 @@ export function llenarFields(data) {
     let fecha = new Date(parseInt(data.FechaNacimiento.replace(/\/Date\((.*?)\)\//, "$1")));
     let fechaFormateada = fecha.toISOString().split('T')[0];
 
-    document.getElementById('tipoDocumento').value = data.TipoDoc.Nombre;
+    document.getElementById('tipoDocumento').value = data.TipoDoc.IdTipoDoc;
     document.getElementById('nmroDocumento').value = data.NroDocumento;
     document.getElementById('nombreUsuario').value = data.Nombres;
     document.getElementById('apellidoUsuario').value = data.Apellidos;
     document.getElementById('lNacimiento').value = data.LugarNacimiento;
     document.getElementById('fNacimiento').value = fechaFormateada;
     document.getElementById('direccion').value = data.Direccion;
-    document.getElementById('rolUsuario').value = data.Roles[0].NameRol;
+    document.getElementById('rolUsuario').value = data.Roles[0].IdRol;
     document.getElementById('email').value = data.Email;
     document.getElementById('username').value = data.Username;
-    document.getElementById('password').value = data.Password;
+    document.getElementById('password').style.display = "none";
+    document.getElementById('labelPass').style.display = "none";
     document.getElementById('activo').value = data.Estado;
-    document.getElementById('telefono').value = data.telefono;
+    document.getElementById('telefono').value = data.Telefono;
 }
 
 export function cambiarMensajeModal(id) {
@@ -102,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Desactivar el botón Guardar al inicio
     btnGuardar.disabled = true;
-    btnActualizar.disabled = true;
+    btnActualizar.disabled = false;
 
     // Botón Nuevo: Abre el modal
     nuevoBtn.addEventListener('click', function () {
