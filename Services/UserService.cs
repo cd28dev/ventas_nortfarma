@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class UserService:IUserService
+    public class UserService:IUserService 
     {
         private IUserData userData;
 
@@ -39,10 +39,10 @@ namespace Services
             return user;
         }
 
-        public List<Usuario> Listar()
+        public List<Usuario> Listar(string tipo)
         {
             List<Usuario> users= new List<Usuario>();
-            users = userData.Listar();
+            users = userData.Listar(tipo);
 
             foreach (Usuario usuario in users)
             {
@@ -74,6 +74,20 @@ namespace Services
         public Usuario lastUser()
         {
             return userData.lastUser();
+        }
+
+        public bool updateUser(Usuario usuario)
+        {
+            if (usuario.Estado == "Si")
+            {
+                usuario.Estado = "1";
+            }
+            else if (usuario.Estado == "No")
+            {
+                usuario.Estado = "0";
+            }
+            bool isUpdated = userData.updateUser(usuario);
+            return isUpdated;
         }
     }
 }

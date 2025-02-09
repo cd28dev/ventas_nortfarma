@@ -33,12 +33,18 @@
                                 <input type="text" class="form-control" id="apellidoUsuario" required>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="lNacimiento" class="form-label">Lugar de Nacimiento</label>
-                                <input type="text" class="form-control" id="lNacimiento" required>
+                                <label for="sexo" class="form-label">Sexo</label>
+                                <select class="form-select" id="sexo">
+                                    <option value="" selected disabled></option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
+                                </select>
                             </div>
+
+
+
                             <div class="col-sm-6">
                                 <label for="fNacimiento" class="form-label">Fecha de Nacimiento</label>
                                 <input type="date" class="form-control" id="fNacimiento" required>
@@ -47,13 +53,22 @@
 
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="direccion" class="form-label">Dirección</label>
-                                <input type="text" class="form-control" id="direccion" required>
+                                <label for="lNacimiento" class="form-label">Lugar de Nacimiento</label>
+                                <input type="text" class="form-control" id="lNacimiento" required>
                             </div>
                             <div class="col-sm-6">
                                 <label for="telefono" class="form-label">Teléfono</label>
                                 <input type="text" class="form-control" id="telefono" required>
                             </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="direccion" class="form-label">Dirección</label>
+                                <input type="text" class="form-control" id="direccion" required>
+                            </div>
+
                         </div>
                     </div> <!-- Fin de seccionDatosPersonales -->
                     <!-- Sección Datos de Usuario (Oculta por defecto) -->
@@ -78,7 +93,7 @@
                                 <input type="text" class="form-control" id="username" required>
                             </div>
                             <div class="col-sm-6">
-                                <label id="labelPass"for="password" class="form-label">Contraseña</label>
+                                <label id="labelPass" for="password" class="form-label">Contraseña</label>
                                 <input type="password" class="form-control" id="password" required>
                             </div>
                         </div>
@@ -92,7 +107,13 @@
                                 </select>
                             </div>
                         </div>
+
+                        <!-- Campo oculto -->
+                        <input type="hidden" id="hiddenUserId" value="">
+                        <input type="hidden" id="hiddenPersonId" value="">
+
                     </div> <!-- Fin de seccionDatosUsuario -->
+
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" id="btnAtras1" style="display: none;">Atrás</button>

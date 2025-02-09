@@ -230,9 +230,11 @@
     <Content Include="Views\Shared\_ModalNuevo.cshtml" />
     <Content Include="Views\Shared\_ModalEliminacion.cshtml" />
     <Content Include="Views\Shared\_ModalConfirmacion.cshtml" />
+    <Content Include="Views\Shared\_ModalContacto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Logos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

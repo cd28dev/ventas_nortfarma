@@ -20,10 +20,10 @@ namespace Models
         public List<Rol> Roles { get; set; }
 
         // Constructor
-        public Usuario(string idUsuario, string idPersona, string username, string password, string estado,
+        public Usuario(string sexo, string idUsuario, string idPersona, string username, string password, string estado,
                        string nombres, string apellidos, string nroDocumento, string email, string telefono,
                        DateTime fechaNacimiento, string lugarNacimiento, string direccion, TipoDocumento idTipoDoc)
-            : base(idPersona, nombres, apellidos, nroDocumento, telefono, fechaNacimiento, lugarNacimiento, direccion, idTipoDoc)
+            : base(sexo, idPersona, nombres, apellidos, nroDocumento, telefono, fechaNacimiento, lugarNacimiento, direccion, idTipoDoc)
         {
             this.IdUsuario = idUsuario;
             this.Username = username;

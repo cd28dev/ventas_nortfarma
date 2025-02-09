@@ -9,8 +9,8 @@ namespace Models
         public TipoCliente tipoCliente { get; set; }
 
         // Constructor
-        public Cliente(string idCliente, string estado, string idPersona, TipoCliente tipoCliente, string nombres, string apellidos, string nroDocumento, string email, string telefono, DateTime fechaNacimiento, string lugarNacimiento, string direccion, string estadoPersona, TipoDocumento tipoDoc)
-            : base(idPersona, nombres, apellidos, nroDocumento, telefono, fechaNacimiento, lugarNacimiento, direccion, tipoDoc)
+        public Cliente(string sexo,string idCliente, string estado, string idPersona, TipoCliente tipoCliente, string nombres, string apellidos, string nroDocumento, string email, string telefono, DateTime fechaNacimiento, string lugarNacimiento, string direccion, string estadoPersona, TipoDocumento tipoDoc)
+            : base(sexo,idPersona, nombres, apellidos, nroDocumento, telefono, fechaNacimiento, lugarNacimiento, direccion, tipoDoc)
         {
             IdCliente = idCliente;
             Estado = estado;

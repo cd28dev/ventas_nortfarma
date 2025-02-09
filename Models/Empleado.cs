@@ -16,8 +16,8 @@ namespace Models
         public List<Anulacion> anulaciones { get; set; }
 
         // Constructor con validación
-        public Empleado(string idPersona, string nombres, string apellidos, string nroDocumento, string email, string telefono, DateTime fechaNacimiento, string lugarNacimiento, string direccion, string estado, TipoDocumento idTipoDoc, string idEmpleado, DateTime fechaIngreso, float salario, string estadoEmpleado, TipoEmpleado te)
-            : base(idPersona, nombres, apellidos, nroDocumento, telefono, fechaNacimiento, lugarNacimiento, direccion, idTipoDoc) // Llamada al constructor de Persona
+        public Empleado(string sexo,string idPersona, string nombres, string apellidos, string nroDocumento, string email, string telefono, DateTime fechaNacimiento, string lugarNacimiento, string direccion, string estado, TipoDocumento idTipoDoc, string idEmpleado, DateTime fechaIngreso, float salario, string estadoEmpleado, TipoEmpleado te)
+            : base(sexo, idPersona, nombres, apellidos, nroDocumento, telefono, fechaNacimiento, lugarNacimiento, direccion, idTipoDoc) // Llamada al constructor de Persona
         {
             IdEmpleado = idEmpleado;
             FechaIngreso = fechaIngreso;

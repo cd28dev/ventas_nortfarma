@@ -1,0 +1,32 @@
+﻿<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <!-- Cambiado de modal-lg a modal-md -->
+        <div class="modal-content">
+            <div class="modal-header bg-secondary text-white py-2">
+                <h6 class="modal-title" id="userModalLabel">Detalles del Usuario</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-0">
+                    <!-- Columna para el icono -->
+                    <div class="col-3 d-flex align-items-center justify-content-center bg-light">
+                        <i id="userIcon" class="fas fa-user" style="font-size: 150px;"></i> <!-- Ícono más pequeño -->
+                    </div>
+                    <hr style="width: 3px; height: 350px; background-color: black; border: none; transform: rotate(0deg);" />
+                    <!-- Columna para la información del usuario -->
+                    <div class="col-8 p-2">
+                        <!-- Menos padding para reducir espacio -->
+                        <p><i class="fas fa-user"></i> <strong>Nombre:</strong> <span id="userName"></span></p>
+                        <p><i class="fas fa-venus-mars"></i> <strong>Género:</strong> <span id="userGender"></span></p>
+                        <p><i class="fas fa-id-card"></i> <strong>Documento:</strong> <span id="userTipoDocumento"></span> - <span id="userNumeroDocumento"></span></p>
+                        <p><i class="fas fa-envelope"></i> <strong>Correo:</strong> <span id="userEmail"></span></p>
+                        <p><i class="fas fa-phone"></i> <strong>Teléfono:</strong> <span id="userPhone"></span></p>
+                        <p><i class="fas fa-map-marker-alt"></i> <strong>Dirección:</strong> <span id="userDireccion"></span></p>
+                        <p><i class="fas fa-globe"></i> <strong>L.Nacimiento:</strong> <span id="userLnacimiento"></span></p>
+                        <p><i class="fas fa-birthday-cake"></i> <strong>F.Nacimiento:</strong> <span id="userFnacimiento"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

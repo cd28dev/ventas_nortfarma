@@ -1,18 +1,19 @@
 ﻿<!-- Modal de confirmación de éxito -->
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="successModalLabel">¡Éxito!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-dialog modal-sm">
+        <!-- Compacto -->
+        <div class="modal-content text-center border-0 shadow-lg">
+            <div class="modal-header bg-success text-white py-2">
+                <h6 class="modal-title" id="successModalLabel">¡Éxito!</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Los datos se guardaron correctamente.
+                <i class="fas fa-check-circle text-success mb-2" style="font-size: 40px;"></i>
+                <p class="mb-1">Los datos se guardaron correctamente.</p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <div class="modal-footer p-2 border-0">
+                <button type="button" class="btn btn-success btn-sm w-100" data-bs-dismiss="modal">Aceptar</button>
             </div>
         </div>
     </div>
 </div>
-

@@ -10,7 +10,7 @@ namespace Services
 {
     public interface IUserService
     {
-        List<Usuario> Listar();
+        List<Usuario> Listar(string tipo);
         Usuario findByDoc(string nroDoc);
 
         int deleteById(string nroDoc);
@@ -18,5 +18,7 @@ namespace Services
         bool saveUser(Usuario usuario);
 
         Usuario lastUser();
+
+        bool updateUser(Usuario usuario);
     }
 }

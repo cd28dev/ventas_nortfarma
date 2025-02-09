@@ -12,12 +12,12 @@ namespace Administrador.Controllers
         private IUserService userService;
 
         [HttpGet]
-        public JsonResult ListarUsuarios()
+        public JsonResult ListarUsuarios(string tipo)
         {
             this.userService = new UserService();
             List<Usuario> users = new List<Usuario>();
 
-            users = userService.Listar();
+            users = userService.Listar(tipo);
 
             return Json(users, JsonRequestBehavior.AllowGet);
         }
@@ -63,6 +63,20 @@ namespace Administrador.Controllers
             }
 
             return Json(new { success = true, userId = user.IdUsuario, message = "Usuario registrado exitosamente" });
+        }
+
+        [HttpPost]
+        public JsonResult UpdateUser(Usuario usuario)
+        {
+            Usuario user = new Usuario();
+            this.userService = new UserService();
+
+            if (userService.updateUser(usuario))
+            {
+                user = usuario;
+            }
+
+            return Json(new { success = true, userId = user.IdUsuario, message = "Usuario actualizado exitosamente" });
         }
 
     }

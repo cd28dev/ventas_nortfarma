@@ -1,4 +1,4 @@
-﻿import { fetchUsers, fetchUserDetails, fetchDeleteUser,fetchSaveUser } from './api.js';
+﻿import { fetchUsers, fetchUserDetails, fetchDeleteUser,fetchSaveUser, fetchUpdateUser } from './api.js';
 import { grid, gridOptions } from './grid.js';
 
 // modal.js
@@ -10,11 +10,47 @@ export function showModal(data) {
     modal.show();
 }
 
+export function showModalContact(data) {
+    let modalElement = document.getElementById('userModal');
+    let modal = new bootstrap.Modal(modalElement);
+    let fecha = new Date(parseInt(data.FechaNacimiento.replace(/\/Date\((.*?)\)\//, "$1")));
+    let fechaFormateada = fecha.toISOString().split('T')[0];
+
+    document.getElementById("userName").textContent = data.Nombres + " " +data.Apellidos;
+    document.getElementById("userGender").textContent = data.Sexo === 'F' ? 'Femenino' : 'Masculino';
+    document.getElementById("userTipoDocumento").textContent = data.TipoDoc.Nombre;
+    document.getElementById("userNumeroDocumento").textContent = data.NroDocumento;
+    document.getElementById("userEmail").textContent = data.Email;
+    document.getElementById("userPhone").textContent = data.Telefono;
+    document.getElementById("userDireccion").textContent = data.Direccion;
+    document.getElementById("userLnacimiento").textContent = data.LugarNacimiento;
+    document.getElementById("userFnacimiento").textContent = fechaFormateada;
+
+    // Icono dinámico según género
+    let icono = document.getElementById("userIcon");
+
+    // Asegurar que el icono es un elemento válido
+    if (icono) {
+        if (data.Sexo === 'M') {
+            icono.setAttribute("class", "fas fa-male text-primary fa-6x"); // Azul para hombres
+        } else if (data.Sexo === 'F') {
+            icono.setAttribute("class", "fas fa-female text-danger fa-6x"); // Rojo para mujeres
+        } else {
+            icono.setAttribute("class", "fas fa-user-circle fa-6x"); // Default
+        }
+    }
+
+    modal.show();
+}
+
 export function llenarFields(data) {
     let fecha = new Date(parseInt(data.FechaNacimiento.replace(/\/Date\((.*?)\)\//, "$1")));
     let fechaFormateada = fecha.toISOString().split('T')[0];
 
+    document.getElementById('hiddenPersonId').value = data.IdPersona
+    document.getElementById('hiddenUserId').value = data.IdUsuario
     document.getElementById('tipoDocumento').value = data.TipoDoc.IdTipoDoc;
+    document.getElementById('sexo').value = data.Sexo;
     document.getElementById('nmroDocumento').value = data.NroDocumento;
     document.getElementById('nombreUsuario').value = data.Nombres;
     document.getElementById('apellidoUsuario').value = data.Apellidos;
@@ -102,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let modalDelete = new bootstrap.Modal(modalElement3);
 
     // Desactivar el botón Guardar al inicio
-    btnGuardar.disabled = true;
+    btnGuardar.disabled = false;
     btnActualizar.disabled = false;
 
     // Botón Nuevo: Abre el modal
@@ -185,14 +221,17 @@ document.addEventListener('DOMContentLoaded', function () {
         validarCampos();
     });
 
-
     // Botón Guardar
     btnGuardar.addEventListener('click', function () {
+        const btTodos = document.getElementById("brTodos");
+        const btActivos = document.getElementById("brActivos");
+        const btNoActivos = document.getElementById("brNoActivos"); 
         const usuario = {
             Username: document.getElementById("username").value,
             Password: document.getElementById("password").value,
             Estado: document.getElementById("activo").value === "Si" ? "1" : "0",
             Email: document.getElementById("email").value,
+            Sexo: document.getElementById("sexo").value,
             Nombres: document.getElementById("nombreUsuario").value,
             Apellidos: document.getElementById("apellidoUsuario").value,
             NroDocumento: document.getElementById("nmroDocumento").value,
@@ -210,26 +249,83 @@ document.addEventListener('DOMContentLoaded', function () {
         };
         fetchSaveUser(usuario)
             .then(data => {
-                modalSuccess.show();
                 modal.hide();
-                fetchUsers()
-                    .then(data => {
+                modalSuccess.show();
+                let filtro = btTodos.checked ? "todos" : btActivos.checked ? "activos" : btNoActivos.checked ? "no activos" : null;
+                if (filtro) {
+                    fetchUsers(filtro).then(data => {
                         gridOptions.api.setRowData(data);
-                    })
+                    });
+                }
             })
     });
 
     btnActualizar.addEventListener('click', function () {
+        const btTodos = document.getElementById("brTodos");
+        const btActivos = document.getElementById("brActivos");
+        const btNoActivos = document.getElementById("brNoActivos");
+        const usuario = {
+            IdPersona: document.getElementById('hiddenPersonId').value,
+            IdUsuario: document.getElementById('hiddenUserId').value,
+            Username: document.getElementById("username").value,
+            Password: document.getElementById("password").value,
+            Estado: document.getElementById("activo").value === "Si" ? "1" : "0",
+            Email: document.getElementById("email").value,
+            Sexo: document.getElementById("sexo").value,
+            Nombres: document.getElementById("nombreUsuario").value,
+            Apellidos: document.getElementById("apellidoUsuario").value,
+            NroDocumento: document.getElementById("nmroDocumento").value,
+            Telefono: document.getElementById("telefono").value,
+            FechaNacimiento: document.getElementById("fNacimiento").value,
+            LugarNacimiento: document.getElementById("lNacimiento").value,
+            Direccion: document.getElementById("direccion").value,
+            TipoDoc: {
+                IdTipoDoc: document.getElementById("tipoDocumento").value
+            },
+            Roles: [{
+                IdRol: document.getElementById("rolUsuario").value
+            }]
+        };
+
+        let filtro = btTodos.checked ? "todos" : btActivos.checked ? "activos" : btNoActivos.checked ? "no activos" : null;
+        fetchUpdateUser(usuario)
+            .then(data => {
+                modalElement1.classList.remove("show");
+                modalElement1.style.display = "none";
+                document.body.classList.remove("modal-open");
+
+                let backdrop = document.querySelector(".modal-backdrop");
+                if (backdrop) {
+                    backdrop.remove();
+                }
+                modalSuccess.show();
+                if (filtro) {
+                    fetchUsers(filtro).then(data => {
+                        gridOptions.api.setRowData(data);
+                    });
+                }
+            });
 
     });
+
 
 
     function validarCampos() {
+        let camposVacios = [];
 
-        const todosLlenos = [...inputsDatosPersonales, ...inputsDatosUsuario].every(input => input.value.trim() !== "");
+        const todosLlenos = [...inputsDatosPersonales, ...inputsDatosUsuario].every(input => {
+            if (input.type !== "hidden" && input.value.trim() === "") {
+                camposVacios.push(input.id); // Guardar los campos vacíos
+                return false;
+            }
+            return true;
+        });
         btnGuardar.disabled = !todosLlenos;
     }
+
+    // Agregar evento a todos los inputs
     [...inputsDatosPersonales, ...inputsDatosUsuario].forEach(input => {
         input.addEventListener("input", validarCampos);
     });
+
 });

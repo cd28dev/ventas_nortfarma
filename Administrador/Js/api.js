@@ -1,8 +1,8 @@
 ﻿// api.js
 
 // Función para obtener la lista de usuarios
-export function fetchUsers() {
-    return fetch('/User/ListarUsuarios', { method: 'GET' })
+export function fetchUsers(tipo) {
+    return fetch(`/User/ListarUsuarios?tipo=${encodeURIComponent(tipo)}`, { method: 'GET' })
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error en la petición: ${response.status} ${response.statusText}`);
@@ -10,7 +10,7 @@ export function fetchUsers() {
             return response.json();
         })
         .catch(error => {
-            console.error('Error en fetchSaveUser:', error);
+            console.error('Error en fetchUser:', error);
             throw error;
         });
 }
@@ -29,7 +29,7 @@ export function fetchUserDetails(idUsuario) {
             return response.json();
         })
         .catch(error => {
-            console.error('Error en fetchSaveUser:', error);
+            console.error('Error en fetchUserDetails:', error);
             throw error;
         });
 }
@@ -44,7 +44,7 @@ export function fetchDeleteUser(id) {
             return response.json();
         })
         .catch(error => {
-            console.error('Error en fetchSaveUser:', error);
+            console.error('Error en fetchDeleteUser:', error);
             throw error;
         });
 }
@@ -66,6 +66,27 @@ export function fetchSaveUser(usuario) {
         })
         .catch(error => {
             console.error('Error en fetchSaveUser:', error);
+            throw error;
+        });
+}
+
+// Función para actualizar un usuario
+export function fetchUpdateUser(usuario) {
+    return fetch('/User/UpdateUser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(usuario)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error en la petición: ${response.status} ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error en fetchUpdateUser:', error);
             throw error;
         });
 }
