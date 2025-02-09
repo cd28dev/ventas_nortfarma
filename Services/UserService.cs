@@ -59,6 +59,12 @@ namespace Services
 
         public bool saveUser(Usuario usuario)
         {
+            bool isSendEmail, isSaved=false;
+            string pass = Helper.genPassword();
+            string asunto = "Creación de cuenta Nortfarma";
+            string msg = "<h3>Su cuenta fue creada con exito.</h3></br><p>Su contraseña para acceder es:!pass!</p>";
+            msg = msg.Replace("!pass!", pass);
+
             if (usuario.Estado == "Si")
             {
                 usuario.Estado = "1";
@@ -67,7 +73,12 @@ namespace Services
             {
                 usuario.Estado = "0";
             }
-            bool isSaved = userData.saveUser(usuario);
+            isSendEmail = Helper.SendEmail(usuario.Email, asunto, msg);
+            if (isSendEmail){
+                usuario.Password = pass;
+                isSaved = userData.saveUser(usuario);
+            }
+
             return isSaved;
         }
 

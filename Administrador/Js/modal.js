@@ -109,7 +109,6 @@ function limpiarCamposModal() {
     document.getElementById('rolUsuario').value = "";
     document.getElementById('email').value = "";
     document.getElementById('username').value = "";
-    document.getElementById('password').value = "";
     document.getElementById('activo').value = "";
     btnGuardar.style.display = "none";  // Mostrar botón Guardar
     btnActualizar.style.display = "none";       // Ocultar botón Actualizar
@@ -228,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const btNoActivos = document.getElementById("brNoActivos"); 
         const usuario = {
             Username: document.getElementById("username").value,
-            Password: document.getElementById("password").value,
+            /*Password: document.getElementById("password").value,*/
             Estado: document.getElementById("activo").value === "Si" ? "1" : "0",
             Email: document.getElementById("email").value,
             Sexo: document.getElementById("sexo").value,
