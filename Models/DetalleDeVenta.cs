@@ -10,8 +10,6 @@ namespace Models
         public double Subtotal { get; set; }
         public Venta venta { get; set; }
 
-        public Producto producto { get; set; }
-
         public Anulacion anulacion { get; set; }
 
         // Constructor con validación

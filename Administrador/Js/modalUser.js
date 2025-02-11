@@ -1,10 +1,39 @@
-﻿import { fetchUsers, fetchUserDetails, fetchDeleteUser,fetchSaveUser, fetchUpdateUser } from './api.js';
-import { grid, gridOptions } from './grid.js';
+﻿import { fetchUsers, fetchUserDetails, fetchDeleteUser,fetchSaveUser, fetchUpdateUser,fetchListRoles, fetchListTd } from './apiUser.js';
+import { grid, gridOptions } from './gridUser.js';
 
 // modal.js
 export function showModal(data) {
     let modalElement = document.getElementById('modalUsuario');
     let modal = new bootstrap.Modal(modalElement);
+    fetchListRoles()
+        .then(d => {
+            let select = document.getElementById("rolUsuario");
+            select.innerHTML = '<option value=""></option>';
+            d.forEach(rol => {
+                let option = document.createElement("option");
+                option.value = rol.IdRol;
+                option.textContent = rol.NameRol;
+                select.appendChild(option);
+            });
+
+            select.value = data.Roles[0].IdRol;
+        })
+
+    fetchListTd()
+        .then(d => {
+            let select = document.getElementById("tipoDocumento");
+            select.innerHTML = '<option value=""></option>';
+            d.forEach(td => {
+                let option = document.createElement("option");
+                option.value = td.IdTipoDoc;
+                option.textContent = td.Nombre;
+                select.appendChild(option);
+            });
+            console.log(data.TipoDoc.IdTipoDoc);
+            select.value = data.TipoDoc.IdTipoDoc;
+        })
+
+
     showBtnUpdate();
     llenarFields(data);
     modal.show();
@@ -49,7 +78,7 @@ export function llenarFields(data) {
 
     document.getElementById('hiddenPersonId').value = data.IdPersona
     document.getElementById('hiddenUserId').value = data.IdUsuario
-    document.getElementById('tipoDocumento').value = data.TipoDoc.IdTipoDoc;
+    /*document.getElementById('tipoDocumento').value = data.TipoDoc.IdTipoDoc;*/
     document.getElementById('sexo').value = data.Sexo;
     document.getElementById('nmroDocumento').value = data.NroDocumento;
     document.getElementById('nombreUsuario').value = data.Nombres;
@@ -57,13 +86,11 @@ export function llenarFields(data) {
     document.getElementById('lNacimiento').value = data.LugarNacimiento;
     document.getElementById('fNacimiento').value = fechaFormateada;
     document.getElementById('direccion').value = data.Direccion;
-    document.getElementById('rolUsuario').value = data.Roles[0].IdRol;
     document.getElementById('email').value = data.Email;
     document.getElementById('username').value = data.Username;
-    document.getElementById('password').style.display = "none";
-    document.getElementById('labelPass').style.display = "none";
     document.getElementById('activo').value = data.Estado;
     document.getElementById('telefono').value = data.Telefono;
+    
 }
 
 export function cambiarMensajeModal(id) {
@@ -152,6 +179,34 @@ document.addEventListener('DOMContentLoaded', function () {
         btnAtras2.style.display = "none";
         seccionDatosPersonales.style.display = "block";
         seccionDatosUsuario.style.display = "none";
+
+        fetchListRoles()
+            .then(data => {
+                console.log("Datos recibidos:", data); // Depuración
+                let select = document.getElementById("rolUsuario");
+                select.innerHTML = '<option value=""></option>';
+                data.forEach(rol => {
+                    console.log("Procesando rol:", rol); // Verifica cada objeto de la lista
+
+                    let option = document.createElement("option");
+                    option.value = rol.IdRol;
+                    option.textContent = rol.NameRol;
+                    select.appendChild(option);
+                });
+            })
+
+        fetchListTd()
+            .then(d => {
+                let select = document.getElementById("tipoDocumento");
+                select.innerHTML = '<option value=""></option>';
+                d.forEach(td => {
+                    let option = document.createElement("option");
+                    option.value = td.IdTipoDoc;
+                    option.textContent = td.Nombre;
+                    select.appendChild(option);
+                });
+            })
+
         modal.show();
     });
 

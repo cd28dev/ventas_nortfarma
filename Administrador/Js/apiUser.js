@@ -90,3 +90,34 @@ export function fetchUpdateUser(usuario) {
             throw error;
         });
 }
+
+
+export function fetchListRoles() {
+    return fetch('/User/GetRoles')
+        .then(response => {
+            console.log("Estado de la respuesta:", response.status);
+            if (!response.ok) {
+                throw new Error("Error al obtener los roles");
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+}
+
+//Función para listar TD, llenar lista desplegable
+export function fetchListTd() {
+    return fetch('/User/GetTipDoc')
+        .then(response => {
+            console.log("Estado de la respuesta:", response.status);
+            if (!response.ok) {
+                throw new Error("Error al obtener los tipos de documentos");
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+}
+

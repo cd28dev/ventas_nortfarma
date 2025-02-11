@@ -11,8 +11,7 @@ namespace Models
         public string Estado { get; set; }
         public Empleado empleado { get; set; }
         public Venta venta { get; set; }
-
-        public List<Comprobante> comprobantes { get; set; }
+        public Comprobante comprobante { get; set; }
         public List<DetalleDePago> detalleDePagos { get; set; }
 
         // Constructor con validación
@@ -29,13 +28,8 @@ namespace Models
 
 
         public Pago() { 
-            comprobantes = new List<Comprobante>();
             detalleDePagos = new List<DetalleDePago>();
             
-        }
-
-        private void addComprobantes(Comprobante comprobante) { 
-            comprobantes.Add(comprobante);
         }
 
         private void addDetalles(DetalleDePago detalleDePago)

@@ -175,9 +175,11 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Js\api.js" />
-    <Content Include="Js\grid.js" />
-    <Content Include="Js\modal.js" />
+    <Content Include="Js\apiUser.js" />
+    <Content Include="Js\gridUser.js" />
+    <Content Include="Js\gridCategory.js" />
+    <Content Include="Js\modalCategory.js" />
+    <Content Include="Js\modalUser.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -229,6 +231,7 @@
     <Content Include="Views\Shared\_ModalEliminacion.cshtml" />
     <Content Include="Views\Shared\_ModalConfirmacion.cshtml" />
     <Content Include="Views\Shared\_ModalContacto.cshtml" />
+    <Content Include="Views\Shared\_ModalNewCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,8 +6,8 @@ namespace Models
     {
         // Propiedades automáticas
         public string IdCategoria { get; set; }
-        public string Descripcion { get; set; }
-        public string Estado { get; set; }
+        public string nameCategory { get; set; }
+        public bool Estado { get; set; }
 
         public List<Producto> Productos { get; set; }
 
@@ -18,10 +18,10 @@ namespace Models
         }
 
         // Constructor lleno
-        public CategoriaProducto(string idCategoria, string descripcion, string estado)
+        public CategoriaProducto(string idCategoria, string name, bool estado)
         {
             IdCategoria = idCategoria;
-            Descripcion = descripcion;
+            nameCategory = name;
             Estado = estado;
         }
     }

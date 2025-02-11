@@ -1,6 +1,6 @@
 ﻿// grid.js
-import { fetchUsers, fetchUserDetails, fetchDeleteUser, fetchSaveUser } from './api.js';
-import { showModal, showModalContact } from './modal.js';
+import { fetchUsers, fetchUserDetails, fetchDeleteUser, fetchSaveUser } from './apiUser.js';
+import { showModal, showModalContact } from './modalUser.js';
 
 // Definición de las columnas
 export const column = [

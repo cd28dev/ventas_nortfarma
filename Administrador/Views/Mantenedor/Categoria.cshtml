@@ -4,5 +4,51 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Categoria</h2>
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="index.html">Resumen</a></li>
+    <li class="breadcrumb-item active">Categorias</li>
+</ol>
 
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-users me-1"></i> Lista de Categorias
+    </div>
+    <div class="card-body" style="display: flex; flex-direction: column; height: 400px; padding: 0;">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center justify-content-between">
+                <button type="button" class="btn btn-success btn-sm mb-1 mt-1 ms-2" id="nuevoBtn">
+                    Nuevo
+                </button>
+                <div class="btn-group btn-sm mb-1 mt-1 ms-2 me-5" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="btnradio" id="brTodos" autocomplete="off" checked>
+                    <label class="btn btn-outline-secondary btn-sm" for="brTodos">Todos</label>
+
+                    <input type="radio" class="btn-check" name="btnradio" id="brActivos" autocomplete="off">
+                    <label class="btn btn-outline-secondary btn-sm" for="brActivos">Activos</label>
+
+                    <input type="radio" class="btn-check" name="btnradio" id="brNoActivos" autocomplete="off">
+                    <label class="btn btn-outline-secondary btn-sm" for="brNoActivos">No Activos</label>
+                </div>
+
+            </div>
+        </div>
+
+        <hr />
+
+        <div id="myGrid" class="ag-theme-alpine" style="flex-grow: 1; width: 100%; height: 100%;"></div>
+    </div>
+</div>
+
+@Html.Partial("_ModalNewCategory")
+@Html.Partial("_ModalEliminacion")
+@Html.Partial("_ModalConfirmacion")
+@Html.Partial("_ModalContacto")
+
+@section scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css" />
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community@28.1.0/dist/ag-grid-community.min.noStyle.js"></script>
+
+    <script type="module" src="~/Js/gridCategory.js"></script>
+    <script type="module" src="~/Js/modalCategory.js"></script>
+}

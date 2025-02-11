@@ -42,7 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper.cs" />
+    <Compile Include="IRolesService.cs" />
+    <Compile Include="ITipoDocService.cs" />
     <Compile Include="IUserService.cs" />
+    <Compile Include="RolesService.cs" />
+    <Compile Include="TipoDocService.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

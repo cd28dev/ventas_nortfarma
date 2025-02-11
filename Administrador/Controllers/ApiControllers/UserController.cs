@@ -10,6 +10,8 @@ namespace Administrador.Controllers
     public class UserController : Controller
     {
         private IUserService userService;
+        private IRolesService rolesService;
+        private ITipoDocService tipoDocService;
 
         [HttpGet]
         public JsonResult ListarUsuarios(string tipo)
@@ -79,5 +81,27 @@ namespace Administrador.Controllers
             return Json(new { success = true, userId = user.IdUsuario, message = "Usuario actualizado exitosamente" });
         }
 
+
+        [HttpGet]
+        public JsonResult GetRoles()
+        {
+            rolesService = new RolesService();
+            List<Rol> roles = new List<Rol>();
+
+            roles = rolesService.listRoles();
+
+            return Json(roles, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetTipDoc()
+        {
+            tipoDocService = new TipoDocService();
+            List<TipoDocumento> documents = new List<TipoDocumento>();
+
+            documents = tipoDocService.GetTipoDocuments();
+
+            return Json(documents, JsonRequestBehavior.AllowGet);
+        }
     }
 }

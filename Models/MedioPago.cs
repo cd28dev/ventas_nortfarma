@@ -7,18 +7,14 @@ namespace Models
     {
         public string IdMedio { get; set; }
         public string Nombre { get; set; }
-        public string Estado { get; set; }
+        public bool Estado { get; set; }
 
+        public Tarjeta tarjeta { get; set; } 
         public List<DetalleDePago>  detalleDePagos { get; set; }
+
         // Constructor con validación
-        public MedioPago(string idMedio, string nombre, string estado)
+        public MedioPago(string idMedio, string nombre, bool estado)
         {
-            if (string.IsNullOrWhiteSpace(idMedio))
-                throw new ArgumentException("El ID del medio de pago no puede estar vacío.");
-            if (string.IsNullOrWhiteSpace(nombre))
-                throw new ArgumentException("El nombre no puede estar vacío.");
-            if (string.IsNullOrWhiteSpace(estado))
-                throw new ArgumentException("El estado no puede estar vacío.");
 
             IdMedio = idMedio;
             Nombre = nombre;
@@ -27,11 +23,9 @@ namespace Models
 
         public MedioPago() { 
             this.detalleDePagos = new List<DetalleDePago>();
+            tarjeta = new Tarjeta();
         }
 
 
-        private void add(DetalleDePago detalleDePago) { 
-            detalleDePagos.Add(detalleDePago);
-        }
     }
 }

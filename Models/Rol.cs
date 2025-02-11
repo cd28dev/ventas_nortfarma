@@ -7,17 +7,17 @@ namespace Models
     {
         public string IdRol { get; set; }
         public string NameRol { get; set; }
+        public bool Estado { get; set; }
 
         public List<Usuario> Usuarios { get; set; }
 
         // Constructor con validación
-        public Rol(string idRol, string nameRol)
+        public Rol(string idRol, string nameRol, bool estado)
         {
-            if (string.IsNullOrWhiteSpace(idRol)) throw new ArgumentException("El ID del rol no puede estar vacío.");
-            if (string.IsNullOrWhiteSpace(nameRol)) throw new ArgumentException("El nombre del rol no puede estar vacío.");
 
             IdRol = idRol;
             NameRol = nameRol;
+            Estado = estado;
         }
 
         public Rol() { 
