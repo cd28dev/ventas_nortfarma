@@ -1,4 +1,4 @@
-# 💊 NortFarma - Sistema de Ventas
+# 💊 NortFarma - Sistema de Ventas (En proceso)
 
 **NortFarma** es una aplicación web para la gestión de ventas en una farmacia, desarrollada con **C#, .NET Framework 4.8 y ASP.NET MVC 5**. Incluye un módulo de administración de productos, clientes y reportes, implementando un backend robusto y un frontend responsive.
 
