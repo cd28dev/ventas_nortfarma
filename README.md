@@ -18,9 +18,6 @@
 ✅ API RESTful con Web API  
 ✅ Interfaz responsive con Bootstrap 5
 
-## 📷 Capturas de Pantalla
-
-
 ## 🚀 Instalación y Configuración
 
 ### 📌 Prerrequisitos
