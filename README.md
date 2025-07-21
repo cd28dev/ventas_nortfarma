@@ -18,7 +18,7 @@
 ✅ API RESTful con Web API  
 ✅ Interfaz responsive con Bootstrap 5
 
-📷 Capturas de Pantalla [Avanzado hasta 26/02/2025]
+## 📷 Capturas de Pantalla [Avanzado hasta 26/02/2025]
 
 
 ## 🚀 Instalación y Configuración
